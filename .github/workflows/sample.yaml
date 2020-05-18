@@ -1,0 +1,34 @@
+name: "Update Version : Sample"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+    update_version:
+      name: "Update Version"
+      runs-on: ubuntu-latest
+      if: "!contains(github.event.head_commit.message, 'chore: bump version')"
+
+      steps:
+        - name: "Check out code"
+          uses: actions/checkout@v2
+          with:
+            token: ${{ secrets.OTTO_TOKEN }}
+            fetch-depth: 0
+
+        - name: "Log Otto"
+          run: |
+            git config --local user.email "otc-builder@outcome.co"
+            git config --local user.name "Otto the Bot"
+
+        - name: "Bump version"
+          id: bump_version
+          # We use the relative path instead of the absolute 'outcome-co/action-update-version@master'
+          # This will always run using the code from the current branch, which is useful for testing
+          uses: ./
+
+        - name: "Push new version"
+          if: ${{ steps.bump_version.outputs.updated == 'true' }}
+          run: git push && git push --follow-tags --tags
