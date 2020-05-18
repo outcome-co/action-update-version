@@ -1,0 +1,43 @@
+name: Checks
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+env:
+   npm_config_cache: .cache/npm
+   node_version: 13.x
+
+jobs:
+    commit_lint:
+      name: "Lint commit messages"
+      runs-on: ubuntu-latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      steps:
+        - name: "Check out code"
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: "Lint commit messages"
+          uses: wagoid/commitlint-github-action@v1
+          with:
+            failOnWarnings: true# Always lint
+    lint_and_test:
+      name: Linting and tests
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Install dependencies
+          run: make dev-setup
+
+        - name: Run linter
+          run: make lint
+
+        - name: Run unit tests
+          run: make test

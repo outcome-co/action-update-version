@@ -1,0 +1,5 @@
+name: action-update-version
+description: This Github Action will automatically version your repositories
+runs:using: 'docker'
+  image: 'Dockerfile'
+
