@@ -1,9 +1,11 @@
 name: "Update Version : Sample"
 
-on:
-  push:
-    branches:
-      - master
+on: push
+# We don't activate the branch restriction to be able to run on the current branch, which is useful for testing
+# on:
+#   push:
+#     branches:
+#       - master
 
 jobs:
     update_version:
