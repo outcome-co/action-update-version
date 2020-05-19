@@ -32,6 +32,8 @@ jobs:
             path: pyproject.toml
             key: build-system.requires
 
+        - run: echo ${{ steps.get_build_system.outputs.build-system_requires }}
+
         - name: "Bump version"
           id: bump_version
           # We use the relative path instead of the absolute 'outcome-co/action-update-version@master'
