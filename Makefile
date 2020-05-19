@@ -3,9 +3,11 @@ APP_VERSION = $(shell docker run --rm -v $$(pwd):/work/ outcomeco/action-read-to
 
 DOCKER_NAMESPACE = outcomeco
 DOCKER_REGISTRY= $(DOCKER_NAMESPACE)/$(APP_NAME)
-# Calling the action fails when BUILD_SYSTEM_REQUIREMENTS is defined with outcomeco/action-read-toml
-# because the docker command isn't defined at this step
-BUILD_SYSTEM_REQUIREMENTS = poetry>=1.0.5
+
+ifndef BUILD_SYSTEM_REQUIREMENTS
+# If the BUILD_SYSTEM_REQUIREMENTS variable is not defined, fetch it using the docker
+BUILD_SYSTEM_REQUIREMENTS = $(shell docker run --rm -v $$(pwd):/work/ outcomeco/action-read-toml:latest --path /work/pyproject.toml --key build-system.requires)
+endif
 
 .PHONY: docker-build docker-clean docker-publish docker-info
 
