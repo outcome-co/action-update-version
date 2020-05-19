@@ -1,5 +1,9 @@
 name: action-update-version
 description: This Github Action will automatically version your repositories
+inputs:
+  build-system-requirements:
+    description: 'Build system requirement - needed for Dockerfile'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
