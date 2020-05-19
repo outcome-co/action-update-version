@@ -1,4 +1,3 @@
-
 PYPROJECT=pyproject.toml
 CZ_TOML=.cz.toml
 PACKAGE_JSON=package.json
