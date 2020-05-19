@@ -5,12 +5,10 @@ This Github Action automatically updates the versions of your repositories.
 
 ## Description
 
-At each push on the `master` branch, it checks all the commits that have occurred since the previous tag, deduces the new version according to the [semantic convention](https://semver.org/) (`MAJOR.MINOR.PATCH`), then bumps the version :
-- Update the config file (depending on your [programming language](https://github.com/outcome-co/action-update-version#supported-languages))
+At each push on the `master` branch, it checks all the commits that have occurred since the previous tag with [Commitizen](https://github.com/commitizen-tools/commitizen), deduces the new version according to the [semantic convention](https://semver.org/) (`MAJOR.MINOR.PATCH`), then bumps the version :
+- Update the config and project version (depending on the [use case](https://github.com/outcome-co/action-update-version#use-cases))
 - Commit the changes with the message : "chore: bump version `{previous_version}` &rarr; `{new_version}`"
 - Add a new tag associated to this commit
-
-> If no tag is found at the first run, by default the first version will be `0.1.0`.
 
 The increments are based on commit types, with the following configuration: 
 
@@ -22,13 +20,19 @@ The increments are based on commit types, with the following configuration:
 
 Other types don't trigger any version bump.
 
-### Supported languages
+### Use Cases
 
-For the moment, only Python projects with a `pyproject.toml` config file are supported.
+3 use cases currently exist:
+- For Python projects, both the project version and commitizen config are in `pyproject.toml`
+- For Node projects, the project version is updated in `package.json`, and Commitizen config is in `.cz.toml`
+- For other projects, the project version is updated in `VERSION`, and Commitizen config is in `.cz.toml`
 
 ## Usage
 
-The Action should be added to your Github Workflow in a YAML file : 
+First, the repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) setup for the Action to work.
+You can use `bin/cz_init.sh` to help setup your repo.
+
+Then the Action should be used in a YAML in your Github Workflow: 
 
 ```yaml
 name: "Update Version"
