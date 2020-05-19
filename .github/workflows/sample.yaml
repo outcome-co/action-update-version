@@ -26,11 +26,11 @@ jobs:
             git config --local user.name "Otto the Bot"
 
         - name: "Get build system"
-          uses: outcome-co/action-read-toml@master
           id: get_build_system
-            with:
-                path: $GITHUB_WORKSPACE/pyproject.toml
-                key: build-system.requires
+          uses: outcome-co/action-read-toml@master
+          with:
+            path: $GITHUB_WORKSPACE/pyproject.toml
+            key: build-system.requires
 
         - name: "Bump version"
           id: bump_version
