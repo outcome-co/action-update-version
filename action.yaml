@@ -3,3 +3,5 @@ description: This Github Action will automatically version your repositories
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.build-system-requirements }}

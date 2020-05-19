@@ -34,6 +34,9 @@ jobs:
         - name: "Checkout code"
           uses: actions/checkout@v2
 
+        - name: "Install dependencies"
+          run: make dev-setup
+
         - name: "Run linter"
           run: make lint
 
