@@ -8,8 +8,6 @@ on:
 env:
    npm_config_cache: .cache/npm
    node_version: 13.x
-   POETRY_CACHE_DIR: ".cache/poetry"
-   PIP_CACHE_DIR: ".cache/pip"
 
 jobs:
     commit_lint:
@@ -35,35 +33,6 @@ jobs:
       steps:
         - name: "Checkout code"
           uses: actions/checkout@v2
-
-        - name: "Get python version"
-          uses: outcome-co/action-read-toml@master
-          id: python_version
-          with:
-            path: pyproject.toml
-            key: tool.poetry.dependencies.python
-
-        - name: "Set up python ${{ steps.python_version.outputs.tool_poetry_dependencies_python }}"
-          uses: actions/setup-python@v1
-          with:
-            python-version: ${{ steps.python_version.outputs.tool_poetry_dependencies_python }}
-
-        - name: Configure pip cache
-          uses: actions/cache@v1
-          with:
-            path: ${{ env.PIP_CACHE_DIR }}
-            # Pip is only used to install poetry, and the poetry version is stored in pyproject.toml
-            key: pip-${{ hashFiles('**/pyproject.toml') }}
-
-        - name: Configure poetry cache
-          uses: actions/cache@v1
-          with:
-            path: ${{ env.POETRY_CACHE_DIR }}
-            # All of the dependencies are stored in pyproject.toml
-            key: poetry-${{ hashFiles('**/pyproject.toml') }}
-  
-        - name: "Install dependencies"
-          run: make ci-setup
 
         - name: "Run linter"
           run: make lint

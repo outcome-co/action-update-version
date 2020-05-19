@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "action-update-version"
-version = "0.4.0"
-description = "This Github Action will automatically version your repositories"
+version = "0.1.0"
+description = "This Github Action automatically updates the versions of your repositories."
 authors = ["Flore de Lasteyrie <flore@outcome.co>"]
 
 [tool.poetry.dependencies]
@@ -36,7 +36,7 @@ skip_glob = "*/.cache/**/*"
 
 [tool.commitizen]
 name = 'cz_conventional_commits'
-version = "0.4.0"
+version = "0.1.0"
 tag_format = '$version'
 bump_message = 'chore: bump version $current_version → $new_version'
 version_files = [
