@@ -1,47 +1,36 @@
-name: "Update Version : Sample"
+# name: "Update Version : Sample"
 
-on: push
-# We don't activate the branch restriction to be able to run on the current branch, which is useful for testing
-# on:
-#   push:
-#     branches:
-#       - master
+# on: push
+# # We don't activate the branch restriction to be able to run on the current branch, which is useful for testing
+# # on:
+# #   push:
+# #     branches:
+# #       - master
 
-jobs:
-    update_version:
-      name: "Update Version"
-      runs-on: ubuntu-latest
-      if: "!contains(github.event.head_commit.message, 'chore: bump version')"
+# jobs:
+#     update_version:
+#       name: "Update Version"
+#       runs-on: ubuntu-latest
+#       if: "!contains(github.event.head_commit.message, 'chore: bump version')"
 
-      steps:
-        - name: "Check out code"
-          uses: actions/checkout@v2
-          with:
-            token: ${{ secrets.OTTO_TOKEN }}
-            fetch-depth: 0
+#       steps:
+#         - name: "Check out code"
+#           uses: actions/checkout@v2
+#           with:
+#             token: ${{ secrets.OTTO_TOKEN }}
+#             fetch-depth: 0
 
-        - name: "Log Otto"
-          run: |
-            git config --local user.email "otc-builder@outcome.co"
-            git config --local user.name "Otto the Bot"
+#         - name: "Log Otto"
+#           run: |
+#             git config --local user.email "otc-builder@outcome.co"
+#             git config --local user.name "Otto the Bot"
 
-        - name: "Get build system"
-          id: get_build_system
-          uses: outcome-co/action-read-toml@master
-          with:
-            path: pyproject.toml
-            key: build-system.requires
+#         - name: "Bump version"
+#           id: bump_version
+#           # We use the relative path instead of the absolute 'outcome-co/action-update-version@master'
+#           # This will always run using the code from the current branch, which is useful for testing
+#           uses: ./
 
-        - run: echo ${{ steps.get_build_system.outputs.build-system_requires }}
-
-        - name: "Bump version"
-          id: bump_version
-          # We use the relative path instead of the absolute 'outcome-co/action-update-version@master'
-          # This will always run using the code from the current branch, which is useful for testing
-          uses: ./
-          with:
-            BUILD_SYSTEM_REQUIREMENTS: ${{ steps.get_build_system.outputs.build-system_requires }}
-
-        - name: "Push new version"
-          if: ${{ steps.bump_version.outputs.updated == 'true' }}
-          run: git push && git push --follow-tags --tags
+#         - name: "Push new version"
+#           if: ${{ steps.bump_version.outputs.updated == 'true' }}
+#           run: git push && git push --follow-tags --tags
