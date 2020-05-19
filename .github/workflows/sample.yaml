@@ -40,7 +40,7 @@ jobs:
           # This will always run using the code from the current branch, which is useful for testing
           uses: ./
           with:
-            build-system-requirements: ${{ steps.get_build_system.outputs.build-system_requires }}
+            BUILD_SYSTEM_REQUIREMENTS: ${{ steps.get_build_system.outputs.build-system_requires }}
 
         - name: "Push new version"
           if: ${{ steps.bump_version.outputs.updated == 'true' }}
