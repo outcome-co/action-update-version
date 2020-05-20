@@ -25,6 +25,7 @@ docker-publish: docker-build
 docker-info:
 	@echo ::set-output name=DOCKER_REGISTRY::$(DOCKER_REGISTRY)
 	@echo ::set-output name=docker_tag::$(APP_VERSION)
+	@echo ::set-output name=docker_build_args::$(BUILD_SYSTEM_REQUIREMENTS)
 
 .PHONY: install-build-system ci-setup dev-setup production-setup lint test
 

@@ -17,18 +17,11 @@ jobs:
           with:
             fetch-depth: 0
 
-        # This provides the repository name, as well as the latest
-        # version which is used as a tag
+        # This provides the repository name, the latest version
+        # which is used as a tag, and the build system requirements
         - name: "Get docker info"
           id: docker_info
           run: make docker-info
-
-        - name: "Get build system"
-          id: get_build_system
-          uses: outcome-co/action-read-toml@master
-          with:
-            path: pyproject.toml
-            key: build-system.requires
         
         - name: "Build & push"
           uses: docker/build-push-action@v1
@@ -37,4 +30,4 @@ jobs:
             password: ${{  secrets.DOCKER_TOKEN }}
             repository: ${{  steps.docker_info.outputs.docker_registry }}
             tags: latest, ${{  steps.docker_info.outputs.docker_tag }}
-            build_args: BUILD_SYSTEM_REQUIREMENTS=${{ steps.get_build_system.outputs.build-system_requires }}
+            build_args: ${{ steps.docker_info.outputs.docker_build_args }}
