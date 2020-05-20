@@ -5,10 +5,10 @@ This Github Action automatically updates the versions of your repositories.
 
 ## Description
 
-At each push on the `master` branch, it checks all the commits that have occurred since the previous tag with [Commitizen](https://github.com/commitizen-tools/commitizen), deduces the new version according to the [semantic convention](https://semver.org/) (`MAJOR.MINOR.PATCH`), then bumps the version :
-- Update the config and project version (depending on the [use case](https://github.com/outcome-co/action-update-version#use-cases))
-- Commit the changes with the message : "chore: bump version `{previous_version}` &rarr; `{new_version}`"
-- Add a new tag associated to this commit
+At each push on the `master` branch, it checks all the commits that have occurred since the previous tag with [Commitizen](https://github.com/commitizen-tools/commitizen), deduces the new version according to the [semantic convention](https://semver.org/) (`MAJOR.MINOR.PATCH`), then bumps the version:
+- Updates the config and project version (depending on the [use case](https://github.com/outcome-co/action-update-version#use-cases))
+- Commits the changes with the message : "chore: bump version `{previous_version}` &rarr; `{new_version}`"
+- Adds a new tag associated to this commit
 
 The increments are based on commit types, with the following configuration: 
 
