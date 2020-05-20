@@ -5,7 +5,7 @@ This Github Action automatically updates the versions of your repositories.
 
 ## Description
 
-At each push on the `master` branch, it checks all the commits that have occurred since the previous tag with [Commitizen](https://github.com/commitizen-tools/commitizen), deduces the new version according to the [semantic convention](https://semver.org/) (`MAJOR.MINOR.PATCH`), then bumps the version:
+At each push on the chosen branches, it checks all the commits (using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)) that have occurred since the previous tag with [Commitizen](https://github.com/commitizen-tools/commitizen), deduces the new version according to the [Semantic Versioning](https://semver.org/), then bumps the version:
 - Updates the config and project version (depending on the [use case](https://github.com/outcome-co/action-update-version#use-cases))
 - Commits the changes with the message : "chore: bump version `{previous_version}` &rarr; `{new_version}`"
 - Adds a new tag associated to this commit
@@ -52,13 +52,13 @@ jobs:
         - name: "Check out code"
           uses: actions/checkout@v2
           with:
-            token: ${{ secrets.OTTO_TOKEN }}
+            token: ${{ secrets.TOKEN }}
             fetch-depth: 0
 
-        - name: "Log Otto"
+        - name: "Configure Git User"
           run: |
-            git config --local user.email "otc-builder@outcome.co"
-            git config --local user.name "Otto the Bot"
+            git config --local user.email "your@email.com"
+            git config --local user.name "Your Name"
 
         - name: "Bump version"
           id: bump_version
@@ -68,6 +68,11 @@ jobs:
           if: ${{ steps.bump_version.outputs.updated == 'true' }}
           run: git push && git push --follow-tags --tags
 ```
+
+## Personal Access Token
+
+To use the Action, we need a personal access token: `${{ secrets.TOKEN }}`.
+This allows to clone the repo, commit the changes, add tags, and push back on the repo.
 
 **Don't forget to adapt the other Actions to avoid the creation of Github Actions loops.**
 
