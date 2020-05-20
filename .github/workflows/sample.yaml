@@ -1,17 +1,15 @@
-name: "Update Version : Sample"
+name: "Bump Version"
 
-on: push
-# We don't activate the branch restriction to be able to run on the current branch, which is useful for testing
-# on:
-#   push:
-#     branches:
-#       - master
+on:
+  push:
+    branches:
+      - master
 
 jobs:
     update_version:
       name: "Update Version"
       runs-on: ubuntu-latest
-      if: "!contains(github.event.head_commit.message, 'chore: bump version')"
+      if: "!startsWith(github.event.head_commit.message, 'chore(version):')"
 
       steps:
         - name: "Check out code"
