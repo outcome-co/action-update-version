@@ -7,6 +7,7 @@ authors = ["Flore de Lasteyrie <flore@outcome.co>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 commitizen = "^1.22.0"
+toml = "^0.10.1"
 
 [tool.poetry.dev-dependencies]
 outcome-devkit-py = "^0.5.0"
@@ -35,13 +36,11 @@ exclude = '''
 skip_glob = "*/.cache/**/*"
 
 [tool.commitizen]
-name = 'cz_conventional_commits'
+name = "cz_conventional_commits"
 version = "0.2.0"
-tag_format = '$version'
-bump_message = 'chore(version): $current_version → $new_version'
-version_files = [
-  'pyproject.toml:version'
-]
+tag_format = "$version"
+bump_message = "chore(version): $current_version → $new_version"
+version_files = [ "pyproject.toml:version",]
 
 [build-system]
 requires = ["poetry>=1.0.5"]
