@@ -10,7 +10,7 @@ name = 'cz_conventional_commits'\n\
 version = '0.1.0'\n\
 tag_format = '\$version'"
 
-MESSAGE_CONFIG="bump_message = 'chore: bump version \$current_version → \$new_version'"
+MESSAGE_CONFIG="chore(version): \$current_version → \$new_version'"
 VERSION_FILE_PYPROJECT="version_files = ['pyproject.toml:version']"
 VERSION_FILE_NPM="version_files = ['package.json:version']"
 VERSION_FILE_OTHER="version_files = ['VERSION']"
