@@ -24,7 +24,7 @@ jobs:
         - name: "Lint commit messages"
           uses: wagoid/commitlint-github-action@v1
           with:
-            failOnWarnings: true# Always lint
+            failOnWarnings: true  # Always lint
 
     lint_and_test:
       name: "Linting and tests"
