@@ -40,7 +40,16 @@ name: "Update Version"
 on:
   push:
     branches:
-      - master
+      - [your_branch]
+
+# If you have other Actions running on the same branch, don't forget to adapt them to avoid the creation
+# of Github Actions loops. For example, if you have a Release Action, the condition could be :
+# on:
+#   push:
+#     branches:
+#       - [your_branch]
+#     tags:
+#       - "*"
 
 jobs:
     update_version:
@@ -72,27 +81,8 @@ jobs:
 ## Personal Access Token
 
 To use the Action, we need a personal access token: `${{ secrets.TOKEN }}`.
-This allows to clone the repo, commit the changes, add tags, and push back on the repo.
 
-**Don't forget to adapt the other Actions to avoid the creation of Github Actions loops.**
-
-For example, a `Release` Action is only run on `master`, if there is a new version to deploy.
-To do this, we can trigger the Action only if the commit message contains "chore: bump version". So the beginning of `release.yaml` will look like :
-
-```yaml
-name: Release
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-    build_push:
-      name: "Build & push Docker image"
-      runs-on: ubuntu-latest
-      if: "contains(github.event.head_commit.message, 'chore: bump version')"
-```
+It should have push access to the repo. It will be used to clone it, commit the changes, add tags, and push back on the repo.
 
 ## Development
 
