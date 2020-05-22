@@ -30,7 +30,6 @@ Other types don't trigger any version bump.
 ## Usage
 
 First, the repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) setup for the Action to work.
-You can use `bin/cz_init.sh` to help setup your repo.
 
 Then the Action should be used in a YAML in your Github Workflow: 
 
@@ -80,7 +79,7 @@ jobs:
 
 ## Personal Access Token
 
-To use the Action, we need a personal access token: `${{ secrets.TOKEN }}`.
+To use the Action, you'll need a personal access token: `${{ secrets.TOKEN }}`.
 
 It should have push access to the repo. It will be used to clone it, commit the changes, add tags, and push back on the repo.
 
