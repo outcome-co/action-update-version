@@ -1,0 +1,11 @@
+
+[run]
+branch = True
+omit =
+    # omit anything in a .pyenv directory anywhere
+    */.pyenv/*
+    */virtualenvs/*
+    **/test/*
+
+[report]
+fail_under = 100

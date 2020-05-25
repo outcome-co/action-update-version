@@ -65,7 +65,7 @@ def add_cz_config(toml_file):
 
 
 def choose_version_file(toml_file):
-    if toml_file == 'pyproject.toml':
+    if toml_file == pyproject:
         return ['{0}:version'.format(toml_file)]
     elif os.path.exists(version_node):
         return ['{0}:version'.format(version_node)]

@@ -44,8 +44,30 @@ production-setup: install-build-system
 	poetry config virtualenvs.create false
 	poetry install --no-dev --no-interaction --no-ansi
 
-lint:
-	# NOOP
+# LINTING
+
+lint: lint-flake lint-black lint-isort
+
+lint-flake:
+	poetry run flake8 .
+
+ifdef INSIDE_CI
+# Inside the CI process, we want to run black with the --check flag and isort
+# with the --diff flag to not change the files but fail if changes should be made
+lint-black:
+	poetry run black --check .
+
+lint-isort:
+	poetry run isort -rc . --check-only
+
+else
+# Outside of the CI process, run black and isort normally
+lint-black:
+	poetry run black .
+
+lint-isort:
+	poetry run isort -rc .
+endif
 
 test:
 	# NOOP

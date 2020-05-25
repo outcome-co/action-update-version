@@ -1,0 +1,47 @@
+[flake8]
+max-line-length = 130
+max-complexity = 18
+# select = B,C,E,F,W,T4,B9
+count = True
+exclude = .git, dist, .cache, __pycache__
+docstring-convention = google
+
+format = ${cyan}%(path)s${reset}:${yellow_bold}%(row)d${reset}:${green_bold}%(col)d${reset}: ${red_bold}%(code)s${reset} %(text)s
+
+ignore = W503, # Allow line break before binary operator
+         WPS306, # Require object as a base class
+         WPS412, # Allow code in __init__.py
+         WPS410, # Allow the use of metadata vars
+         D101, # Don't require  docstrings in public class
+         D102, # Don't require  docstrings in public method
+         D103, # Don't require  docstrings in public function
+         D104, # Don't require  docstrings in public package
+         D105, # Don't require  docstrings in magic method
+         D106, # Don't require  docstrings in public nested class
+         D107, # Don't require docstrings in __init__ files
+         B008, # Allow function calls in argument defaults
+         IF100, # Allow "[on_true] if [expression] else [on_false]" syntax
+         WPS110, # Allow "wrong" variable names (eg. value)
+         WPS111, # Allow short variable names (eg. k, v)
+         WPS202, # Allow many module members (<7)
+         WPS210, # Allow more than 5 local variables (eg. config.flatten_keys())
+         WPS221, # Allow Jones complexity > 14
+         WPS229, # Allow `try` with body length > 1
+         WPS301, # Allow dotted raw imports (eg. folder.module)
+         WPS305, # Allow `f` strings
+         WPS329, # Allow 'meaningless' except cases
+         WPS403, # Allow several `noqa` comments (> 5)
+         WPS404, # Allow 'complex' default values (eg. var=Depends(function))
+         WPS420 # Allows keywords `global` and `pass`
+         WPS428, # Allow statements with no effect (like """)
+         WPS431, # Allow nested classes
+         WPS437, # Allow usage of protected attribute : _state
+         WPS442, # Allow shadowing outer scope names
+         WPS501, # Allow `finally` in `try` block without `except`
+         WPS604, # Allow usage of `pass` or `global var` inside classes
+         WPS613, # Allow statements like `super().__setattr__('_state', db_state)`
+
+per-file-ignores = **/*test*.py: S101
+# S101, # Allow usage of assert a == b
+
+[isort]
