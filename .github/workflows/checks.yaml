@@ -8,6 +8,8 @@ on:
 env:
    npm_config_cache: .cache/npm
    node_version: 13.x
+   POETRY_CACHE_DIR: ".cache/poetry"
+   PIP_CACHE_DIR: ".cache/pip"
 
 jobs:
     commit_lint:
