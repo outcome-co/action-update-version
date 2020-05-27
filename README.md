@@ -7,7 +7,7 @@ This Github Action automatically updates the versions of your repositories.
 
 At each push on the chosen branches, it checks all the commits (using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)) that have occurred since the previous tag with [Commitizen](https://github.com/commitizen-tools/commitizen), deduces the new version according to the [Semantic Versioning](https://semver.org/), then bumps the version:
 - Updates the config and project version (depending on the [use case](https://github.com/outcome-co/action-update-version#use-cases))
-- Commits the changes with the message : "chore: bump version `{previous_version}` &rarr; `{new_version}`"
+- Commits the changes with the message : "chore(version): `{previous_version}` &rarr; `{new_version}`"
 - Adds a new tag associated to this commit
 
 The increments are based on commit types, with the following configuration: 
@@ -29,7 +29,7 @@ Other types don't trigger any version bump.
 
 ## Usage
 
-First, the repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) setup for the Action to work.
+First, the repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) set up for the Action to work.
 
 Then the Action should be used in a YAML in your Github Workflow: 
 
@@ -54,7 +54,7 @@ jobs:
     update_version:
       name: "Update Version"
       runs-on: ubuntu-latest
-      if: "!contains(github.event.head_commit.message, 'chore: bump version')"
+      if: "!contains(github.event.head_commit.message, 'chore(version): ')"
 
       steps:
         - name: "Check out code"
@@ -81,7 +81,9 @@ jobs:
 
 To use the Action, you'll need a personal access token: `${{ secrets.TOKEN }}`.
 
-It should have push access to the repo. It will be used to clone it, commit the changes, add tags, and push back on the repo.
+If you want to use the Action on protected branches, the token should have push access to the repo. It will be used to clone it, commit the changes, add tags, and push back on the repo.
+
+Otherwise, you can just use the [Github Action Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token).
 
 ## Development
 
