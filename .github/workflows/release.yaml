@@ -30,4 +30,4 @@ jobs:
             password: ${{  secrets.DOCKER_TOKEN }}
             repository: ${{  steps.docker_info.outputs.docker_registry }}
             tags: latest, ${{  steps.docker_info.outputs.docker_tag }}
-            build_args: ${{ steps.docker_info.outputs.docker_build_args }}
+            build_args: BUILD_SYSTEM_REQUIREMENTS=${{ steps.docker_info.outputs.docker_build_args }}
