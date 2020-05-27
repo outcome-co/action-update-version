@@ -46,7 +46,7 @@ production-setup: install-build-system
 
 # LINTING
 
-lint: lint-flake lint-black lint-isort
+lint: lint-isort lint-black lint-flake
 
 lint-flake:
 	poetry run flake8 .
