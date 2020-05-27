@@ -119,7 +119,7 @@ description = "Python commitizen client tool"
 name = "commitizen"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.22.0"
+version = "1.22.1"
 
 [package.dependencies]
 colorama = ">=0.4.1,<0.5.0"
@@ -966,7 +966,7 @@ category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
 optional = false
-python-versions = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "5.3.1"
 
 [[package]]
@@ -1200,7 +1200,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "aa6a684f4d6fd06d2fdcd8d3b4a5f6eb6b5acce705f89c47f4c61ed43cb94c4f"
+content-hash = "6cf0fe4519bb573a064186b8d410e282b9d7e944e35635543df0d2561dba9760"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1249,8 +1249,8 @@ colorama = [
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
 ]
 commitizen = [
-    {file = "commitizen-1.22.0-py3-none-any.whl", hash = "sha256:7999f945a4a2097c39b5caab61218623727f16c5a32fca27ccfc84f3eb79b09e"},
-    {file = "commitizen-1.22.0.tar.gz", hash = "sha256:fa00d8e13842b1c2f814938453d27c63c4f735eb797980408747c5f8a6cac931"},
+    {file = "commitizen-1.22.1-py3-none-any.whl", hash = "sha256:e9dac7cbcb8c7a4ee08d9fcc3ce16a115b0bd2295643235c34f849d18b8bb7d6"},
+    {file = "commitizen-1.22.1.tar.gz", hash = "sha256:de59e41396c8ae592b9a53eb1e7f05e0dfefe554dbce4736c0554ae2d7f7e21b"},
 ]
 coverage = [
     {file = "coverage-5.1-cp27-cp27m-macosx_10_12_x86_64.whl", hash = "sha256:0cb4be7e784dcdc050fc58ef05b71aa8e89b7e6636b99967fadbdba694cf2b65"},
