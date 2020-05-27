@@ -36,6 +36,7 @@ To set up Commitizen on a repo, you can run
 docker run -v `pwd`:/tmp -w /tmp outcomeco/action-update-version:latest init
 ```
 This will add the configuration in `pyproject.toml` or `.cz.toml`.
+> Note: If Commitizen is already configured, it won't update the configuration.
 
 
 - Then the Action should be used in a YAML in your Github Workflow:
