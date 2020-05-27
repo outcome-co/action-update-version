@@ -10,8 +10,9 @@ fi
 if [ $# == 1 ] && [ $@ == 'init' ]; then
 ## Initialize repo ##
 python ../app/bin/setup_cz.py
+exit 0
+fi
 
-else
 ## Bump version ##
 
 # Get tags from repo
@@ -29,4 +30,3 @@ echo ::set-output name=updated::true
 fi
 
 echo ::set-output name=version::$(cz version --project)
-fi
