@@ -70,4 +70,5 @@ lint-isort:
 endif
 
 test:
-	# NOOP
+	poetry run coverage run -m pytest
+	poetry run coverage report -m
