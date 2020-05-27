@@ -12,3 +12,24 @@ repos:
     hooks:
       - id: no-commit-to-branch
         args: [--branch, master]
+
+  - repo: local
+    hooks:
+  
+    - id: lint
+      name: lint
+      language: system  # Running on the local system
+      stages: [commit, push]
+      verbose: true
+      entry: sh -c "CI=true make lint"
+      types: [file, python]  # Only triggered if python files are changed in the commit
+      pass_filenames: false
+  
+    - id: test
+      name: test
+      language: system  # Running on the local system
+      stages: [push]
+      verbose: true
+      entry: sh -c "CI=true make test"
+      types: [file, python]  # Only triggered if python files are changed in the commit
+      pass_filenames: false

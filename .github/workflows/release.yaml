@@ -2,13 +2,14 @@ name: Release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 jobs:
     build_push:
       name: "Build & push Docker image"
       runs-on: ubuntu-latest
+      if: github.event.base_ref == 'refs/heads/master'
 
       steps:
         - name: "Check out code"
@@ -16,8 +17,8 @@ jobs:
           with:
             fetch-depth: 0
 
-        # This provides the repository name, as well as the latest
-        # version which is used as a tag
+        # This provides the repository name, the latest version
+        # which is used as a tag, and the build system requirements
         - name: "Get docker info"
           id: docker_info
           run: make docker-info
@@ -29,3 +30,4 @@ jobs:
             password: ${{  secrets.DOCKER_TOKEN }}
             repository: ${{  steps.docker_info.outputs.docker_registry }}
             tags: latest, ${{  steps.docker_info.outputs.docker_tag }}
+            build_args: ${{ steps.docker_info.outputs.docker_build_args }}

@@ -24,20 +24,18 @@ jobs:
         - name: "Lint commit messages"
           uses: wagoid/commitlint-github-action@v1
           with:
-            failOnWarnings: true# Always lint
+            failOnWarnings: true
+    # Always lint
     lint_and_test:
-      name: Linting and tests
+      name: "Linting and tests"
       runs-on: ubuntu-latest
 
       steps:
-        - name: Checkout code
+        - name: "Checkout code"
           uses: actions/checkout@v2
 
-        - name: Install dependencies
-          run: make dev-setup
-
-        - name: Run linter
+        - name: "Run linter"
           run: make lint
 
-        - name: Run unit tests
+        - name: "Run unit tests"
           run: make test
