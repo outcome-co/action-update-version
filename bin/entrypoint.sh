@@ -5,6 +5,14 @@ if [ -n "$GITHUB_WORKSPACE" ]; then
     echo "Switching to Github Workspace: ${GITHUB_WORKSPACE}"
 fi
 
+# Check which mode is run : init or default (bump)
+if [ $# == 1 ] && [ $@ == 'init' ]; then
+## Initialize repo ##
+python bin/setup_cz.py
+
+else
+## Bump version ##
+
 # Get tags from repo
 git fetch --tags
 
@@ -18,4 +26,6 @@ echo ::set-output name=updated::false
 else
 echo ::set-output name=updated::true
 fi
+
 echo ::set-output name=version::$(cz version --project)
+fi
