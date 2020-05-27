@@ -9,6 +9,7 @@ jobs:
     update_version:
       name: "Update Version"
       runs-on: ubuntu-latest
+      # This avoids the workflow triggering itself when the version changes are pushed
       if: "!startsWith(github.event.head_commit.message, 'chore(version):')"
 
       steps:
@@ -25,9 +26,7 @@ jobs:
 
         - name: "Bump version"
           id: bump_version
-          # We use the relative path instead of the absolute 'outcome-co/action-update-version@master'
-          # This will always run using the code from the current branch, which is useful for testing
-          uses: ./
+          uses: 'outcome-co/action-update-version@master'
 
         - name: "Push new version"
           if: ${{ steps.bump_version.outputs.updated == 'true' }}
