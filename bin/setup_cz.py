@@ -8,8 +8,8 @@ The script will detect the version files to update, either pyproject.toml, packa
 
 import json
 import logging
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import toml
 
@@ -23,10 +23,10 @@ default_version = '0.1.0'
 
 def main():
     if pyproject.exists():
-        if not is_cz_in_toml(pyproject):
-            add_cz_config(pyproject)
-        else:
+        if is_cz_in_toml(pyproject):
             logging.info(f'cz already configured in {pyproject}')
+        else:
+            add_cz_config(pyproject)
 
     elif cz_toml.exists():
         if not is_cz_in_toml(cz_toml):
@@ -63,13 +63,13 @@ def add_cz_config(toml_file):
     existing_config = {}
 
     if toml_file.exists():
-        with open(toml_file, 'r') as toml_file_handle:
-            existing_config = toml.load(toml_file_handle)
+        with open(toml_file, 'r') as read_toml_file_handle:
+            existing_config = toml.load(read_toml_file_handle)
 
     config = {**existing_config, **cz_config}
 
-    with open(toml_file, 'w') as toml_file_handle:
-        toml.dump(config, toml_file_handle)
+    with open(toml_file, 'w') as write_toml_file_handle:
+        toml.dump(config, write_toml_file_handle)
 
 
 def get_current_version_info():
