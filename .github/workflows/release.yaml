@@ -9,7 +9,7 @@ jobs:
     build_push:
       name: "Build & push Docker image"
       runs-on: ubuntu-latest
-      if: github.ref == 'refs/heads/master'
+      if: github.event.base_ref == 'refs/heads/master'
 
       steps:
         - name: "Check out code"
