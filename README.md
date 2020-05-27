@@ -29,10 +29,16 @@ Other types don't trigger any version bump.
 
 ## Usage
 
-First, the repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) setup for the Action to work.
-You can use `bin/cz_init.sh` to help setup your repo.
+- First, the repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) setup for the Action to work.
 
-Then the Action should be used in a YAML in your Github Workflow: 
+To set up Commitizen on a repo, you can run
+```bash
+docker run -v `pwd`:/tmp -w /tmp outcomeco/action-update-version:latest init
+```
+This will add the configuration in `pyproject.toml` or `.cz.toml`.
+
+
+- Then the Action should be used in a YAML in your Github Workflow:
 
 ```yaml
 name: "Update Version"
