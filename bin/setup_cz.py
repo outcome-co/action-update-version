@@ -82,7 +82,7 @@ def cz_config_template(version, version_file):
             'commitizen': {
                 'name': 'cz_conventional_commits',
                 'version': version,
-                'tag_format': '$version',
+                'tag_format': 'v$version',
                 'bump_message': 'chore(version): $current_version → $new_version',
                 'version_files': version_file,
             },
