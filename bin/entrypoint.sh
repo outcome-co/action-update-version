@@ -8,7 +8,7 @@ fi
 # Check which mode is run : init or default (bump)
 if [ $# == 1 ] && [ $@ == 'init' ]; then
 ## Initialize repo ##
-python bin/setup_cz.py
+python ../app/bin/setup_cz.py
 
 else
 ## Bump version ##
