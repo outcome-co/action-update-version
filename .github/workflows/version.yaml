@@ -9,6 +9,7 @@ jobs:
     update_version:
       name: "Update Version"
       runs-on: ubuntu-latest
+      # This avoids the workflow triggering itself when the version changes are pushed
       if: "!startsWith(github.event.head_commit.message, 'chore(version):')"
 
       steps:
