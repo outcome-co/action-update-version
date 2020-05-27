@@ -38,7 +38,7 @@ skip_glob = "*/.cache/**/*"
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.2.0"
-tag_format = "$version"
+tag_format = "v$version"
 bump_message = "chore(version): $current_version → $new_version"
 version_files = [ "pyproject.toml:version",]
 
