@@ -16,6 +16,14 @@ repos:
   - repo: local
     hooks:
   
+    - id: autoupdate
+      name: autoupdate
+      language: system  # Running on the local system
+      stages: [push]
+      verbose: true
+      entry: pre-commit autoupdate
+      pass_filenames: false
+
     - id: lint
       name: lint
       language: system  # Running on the local system
