@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 
 import toml
+import tomlkit
 
 cz_toml = Path('.cz.toml')
 pyproject = Path('pyproject.toml')
@@ -60,16 +61,20 @@ def add_cz_config(toml_file):
 
     cz_config = cz_config_template(version, version_file)
 
-    existing_config = {}
+    table_commitizen = tomlkit.table()
+    [table_commitizen.add(key, value) for key, value in cz_config.items()]
 
     if toml_file.exists():
-        with open(toml_file, 'r') as read_toml_file_handle:
-            existing_config = toml.load(read_toml_file_handle)
+        with open(toml_file, 'r') as reader:
+            toml_content = reader.read()
+        existing_config = tomlkit.parse(toml_content)
+    else:
+        existing_config = {}
 
-    config = {**existing_config, **cz_config}
+    existing_config['tool.commitizen'] = table_commitizen
 
-    with open(toml_file, 'w') as write_toml_file_handle:
-        toml.dump(config, write_toml_file_handle)
+    with open(toml_file, 'w') as writer:
+        writer.write(tomlkit.dumps(existing_config))
 
 
 def get_current_version_info():
@@ -98,15 +103,11 @@ def get_current_version_info():
 
 def cz_config_template(version, version_file):
     return {
-        'tool': {
-            'commitizen': {
-                'name': 'cz_conventional_commits',
-                'version': version,
-                'tag_format': 'v$version',
-                'bump_message': 'chore(version): $current_version → $new_version',
-                'version_files': [version_file],
-            },
-        },
+        'name': 'cz_conventional_commits',
+        'version': version,
+        'tag_format': 'v$version',
+        'bump_message': 'chore(version): $current_version → $new_version',
+        'version_files': [version_file],
     }
 
 

@@ -8,6 +8,7 @@ authors = ["Flore de Lasteyrie <flore@outcome.co>"]
 python = "^3.7"
 commitizen = "^1.22.0"
 toml = "^0.10.1"
+tomlkit = "0.5.3"
 
 [tool.poetry.dev-dependencies]
 outcome-devkit-py = "^0.5.0"
@@ -35,13 +36,6 @@ exclude = '''
 [tool.isort]
 skip_glob = "*/.cache/**/*"
 
-[tool.commitizen]
-name = "cz_conventional_commits"
-version = "0.3.0"
-tag_format = "v$version"
-bump_message = "chore(version): $current_version → $new_version"
-version_files = [ "pyproject.toml:version",]
-
 [tool.coverage.run]
 branch = true
 omit = ["*/.pyenv/*", "*/virtualenvs/*", "**/test/*"]
@@ -52,3 +46,10 @@ fail_under = 100
 [build-system]
 requires = ["poetry>=1.0.5"]
 build-backend = "poetry.masonry.api"
+
+["tool.commitizen"]
+name = "cz_conventional_commits"
+version = "0.3.0"
+tag_format = "v$version"
+bump_message = "chore(version): $current_version → $new_version"
+version_files = ["pyproject.toml:version"]
