@@ -66,12 +66,11 @@ def add_cz_config(toml_file):
 
     if toml_file.exists():
         with open(toml_file, 'r') as reader:
-            toml_content = reader.read()
-        existing_config = tomlkit.parse(toml_content)
+            existing_config = tomlkit.parse(reader.read())
     else:
         existing_config = {}
 
-    existing_config['tool.commitizen'] = table_commitizen
+    existing_config['tool']['commitizen'] = table_commitizen
 
     with open(toml_file, 'w') as writer:
         writer.write(tomlkit.dumps(existing_config))
