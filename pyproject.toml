@@ -43,13 +43,13 @@ omit = ["*/.pyenv/*", "*/virtualenvs/*", "**/test/*"]
 [tool.coverage.report]
 fail_under = 100
 
-[build-system]
-requires = ["poetry>=1.0.5"]
-build-backend = "poetry.masonry.api"
-
-["tool.commitizen"]
+[tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.3.0"
 tag_format = "v$version"
 bump_message = "chore(version): $current_version → $new_version"
 version_files = ["pyproject.toml:version"]
+
+[build-system]
+requires = ["poetry>=1.0.5"]
+build-backend = "poetry.masonry.api"

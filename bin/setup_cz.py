@@ -12,7 +12,8 @@ import sys
 from pathlib import Path
 
 import toml
-import tomlkit
+
+from tomlkit_dev import tomlkit
 
 cz_toml = Path('.cz.toml')
 pyproject = Path('pyproject.toml')
@@ -58,22 +59,25 @@ def add_cz_config(toml_file):
 
     version, version_file = get_current_version_info()
     logging.info(f'Version set to {version} with filepath {version_file}')
-
     cz_config = cz_config_template(version, version_file)
 
-    table_commitizen = tomlkit.table()
-    [table_commitizen.add(key, value) for key, value in cz_config.items()]
+    with open(toml_file, 'r') as f_read:
+        existing_config = tomlkit.parse(f_read.read())
 
-    if toml_file.exists():
-        with open(toml_file, 'r') as reader:
-            existing_config = tomlkit.parse(reader.read())
-    else:
-        existing_config = {}
+    new_config = add_cz_to_config(existing_config, cz_config)
 
-    existing_config['tool']['commitizen'] = table_commitizen
+    with open(toml_file, 'w') as f_write:
+        f_write.write(tomlkit.dumps(new_config))
 
-    with open(toml_file, 'w') as writer:
-        writer.write(tomlkit.dumps(existing_config))
+
+def add_cz_to_config(existing_config, cz_config):
+    cz_table = tomlkit.table()
+    [cz_table.add(key, value) for key, value in cz_config.items()]
+    existing_config['tool'].add('commitizen', cz_table)
+    # Since tomlkit doesn't handle nested table insertion well, we manually correct the indent and the trail it inferred
+    existing_config['tool']['commitizen'].trivia.indent = ''
+    existing_config['tool']['commitizen']['version_files'].trivia.trail += '\n'  # noqa: WPS219, WPS336
+    return existing_config
 
 
 def get_current_version_info():
