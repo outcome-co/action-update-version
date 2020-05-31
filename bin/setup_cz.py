@@ -12,8 +12,7 @@ import sys
 from pathlib import Path
 
 import toml
-
-from tomlkit_dev import tomlkit
+import tomlkit
 
 cz_toml = Path('.cz.toml')
 pyproject = Path('pyproject.toml')
@@ -21,6 +20,14 @@ package_json = Path('package.json')
 version_other = Path('VERSION')
 
 default_version = '0.1.0'
+
+CZ_TEMPLATE = """[tool.commitizen]
+name = "cz_conventional_commits"
+version = ""
+tag_format = "v$version"
+bump_message = "chore(version): $current_version → $new_version"
+version_files = []
+\n"""
 
 
 def main():
@@ -54,30 +61,34 @@ def is_cz_in_toml(toml_file):
     return 'commitizen' in parsed_toml['tool'].keys()
 
 
-def add_cz_config(toml_file):
+def add_cz_config(toml_file):  # pragma: no cover
     logging.info(f'Adding Commitizen config to {toml_file}')
 
     version, version_file = get_current_version_info()
     logging.info(f'Version set to {version} with filepath {version_file}')
+
     cz_config = cz_config_template(version, version_file)
+    existing_config = get_existing_config(toml_file)
 
-    with open(toml_file, 'r') as f_read:
-        existing_config = tomlkit.parse(f_read.read())
+    new_config = merge_existing_and_cz(existing_config, cz_config)
+    write_new_config(toml_file, new_config)
 
-    new_config = add_cz_to_config(existing_config, cz_config)
 
+def get_existing_config(toml_file):  # pragma: no cover
+    if toml_file.exists():
+        with open(toml_file, 'r') as f_read:
+            return tomlkit.parse(f_read.read())
+    return tomlkit.document()
+
+
+def write_new_config(toml_file, new_config):  # pragma: no cover
     with open(toml_file, 'w') as f_write:
         f_write.write(tomlkit.dumps(new_config))
 
 
-def add_cz_to_config(existing_config, cz_config):
-    cz_table = tomlkit.table()
-    [cz_table.add(key, value) for key, value in cz_config.items()]
-    existing_config['tool'].add('commitizen', cz_table)
-    # Since tomlkit doesn't handle nested table insertion well, we manually correct the indent and the trail it inferred
-    existing_config['tool']['commitizen'].trivia.indent = ''
-    existing_config['tool']['commitizen']['version_files'].trivia.trail += '\n'  # noqa: WPS219, WPS336
-    return existing_config
+def merge_existing_and_cz(existing_config, cz_config):
+    merged = existing_config.as_string() + cz_config.as_string()
+    return tomlkit.parse(merged)
 
 
 def get_current_version_info():
@@ -96,24 +107,21 @@ def get_current_version_info():
 
     if version_other.exists():
         version = open(version_other, 'r').read().strip()  # noqa: WPS515
-        return version, version_other
+        return version, str(version_other)
 
     with open(version_other, 'w') as version_other_handle:
         version_other_handle.write(f'{default_version}\n')
 
-    return default_version, version_other
+    return default_version, str(version_other)
 
 
 def cz_config_template(version, version_file):
-    return {
-        'name': 'cz_conventional_commits',
-        'version': version,
-        'tag_format': 'v$version',
-        'bump_message': 'chore(version): $current_version → $new_version',
-        'version_files': [version_file],
-    }
+    cz_parsed = tomlkit.parse(CZ_TEMPLATE)
+    cz_parsed['tool']['commitizen']['version'] = version
+    cz_parsed['tool']['commitizen']['version_files'].append(version_file)
+    return cz_parsed
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     logging.getLogger().setLevel(logging.INFO)
     main()
