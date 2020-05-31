@@ -41,7 +41,7 @@ ignore = W503, # Allow line break before binary operator
          WPS604, # Allow usage of `pass` or `global var` inside classes
          WPS613, # Allow statements like `super().__setattr__('_state', db_state)`
 
-per-file-ignores = **/*test*.py: S101, WPS226
+per-file-ignores = **/*test*.py: S101, WPS226, WPS219
                    bin/setup_cz.py: WPS226
 # S101, # Allow usage of assert a == b
 # WPS226, # Allow over-use of pathlib.Path.exists for tests and setting up Commitizen
