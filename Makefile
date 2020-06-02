@@ -1,7 +1,7 @@
 APP_NAME = $(shell docker run --rm -v $$(pwd):/work/ outcomeco/action-read-toml:latest --path /work/pyproject.toml --key tool.poetry.name)
 APP_VERSION = $(shell docker run --rm -v $$(pwd):/work/ outcomeco/action-read-toml:latest --path /work/pyproject.toml --key tool.poetry.version) 
 
-DOCKER_NAMESPACE = outcomeco
+DOCKER_NAMESPACE = $(shell docker run --rm -v $$(pwd):/work/ outcomeco/action-read-toml:latest --path /work/pyproject.toml --key tool.docker.namespace)
 DOCKER_REGISTRY= $(DOCKER_NAMESPACE)/$(APP_NAME)
 
 ifndef BUILD_SYSTEM_REQUIREMENTS
@@ -22,10 +22,15 @@ docker-publish: docker-build
 	docker push $(DOCKER_REGISTRY):$(APP_VERSION)
 	docker push $(DOCKER_REGISTRY):latest
 
+# We use $(info) instead of @echo to avoid passing the variables to the shell
+# as they can contain special chars like '>' that redirect the output
+# We need the trailing comment else make complains that there's 'nothing to do'
+# in the target
 docker-info:
-	@echo ::set-output name=DOCKER_REGISTRY::$(DOCKER_REGISTRY)
-	@echo ::set-output name=docker_tag::$(APP_VERSION)
-	@echo ::set-output name=docker_build_args::$(BUILD_SYSTEM_REQUIREMENTS)
+	$(info ::set-output name=docker_registry::$(DOCKER_REGISTRY))
+	$(info ::set-output name=docker_tag::$(APP_VERSION))
+	$(info ::set-output name=docker_build_args::$(BUILD_SYSTEM_REQUIREMENTS))
+	@#
 
 .PHONY: install-build-system ci-setup dev-setup production-setup lint test
 
