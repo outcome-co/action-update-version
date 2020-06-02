@@ -13,12 +13,12 @@ endif
 
 .PHONY: lint lint-isort lint-black lint-flake
 
-lint: clean lint-isort lint-black lint-flake ## Run all linters
+lint: lint-isort lint-black lint-flake ## Run all linters
 
 ifdef INSIDE_CI
 # Inside the CI process, we want to run isort with the --diff flag and black with
 # the --check flag to not change the files but fail if changes should be made
-lint-isort: ## Run isort
+lint-isort: clean ## Run isort
 	poetry run isort -rc . --check-only
 
 lint-black: ## Run black
@@ -27,7 +27,7 @@ endif
 
 ifdef NOT_INSIDE_CI
 # Outside of the CI process, run isort and black normally
-lint-isort:
+lint-isort: clean
 	poetry run isort -rc .
 
 lint-black:
