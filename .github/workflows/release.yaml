@@ -7,23 +7,23 @@ on:
 
 jobs:
     build_push:
-      name: "Build & push Docker image"
+      name: Build & push Docker image
       runs-on: ubuntu-latest
       if: github.event.base_ref == 'refs/heads/master'
 
       steps:
-        - name: "Check out code"
+        - name: Check out code
           uses: actions/checkout@v2
           with:
             fetch-depth: 0
 
         # This provides the repository name, the latest version
         # which is used as a tag, and the build system requirements
-        - name: "Get docker info"
+        - name: Get docker info
           id: docker_info
           run: make docker-info
         
-        - name: "Build & push"
+        - name: Build & push
           uses: docker/build-push-action@v1
           with:
             username: ${{  secrets.DOCKER_USERNAME }}

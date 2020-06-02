@@ -5,7 +5,7 @@ on:
 
 jobs:
   auto-approve:
-    name: "Auto-approve dependabot pull requests"
+    name: Auto-approve dependabot pull requests
     runs-on: ubuntu-latest
 
     steps:

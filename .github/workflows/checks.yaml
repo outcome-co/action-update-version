@@ -13,37 +13,37 @@ env:
 
 jobs:
     commit_lint:
-      name: "Lint commit messages"
+      name: Lint commit messages
       runs-on: ubuntu-latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       steps:
-        - name: "Check out code"
+        - name: Check out code
           uses: actions/checkout@v2
           with:
             fetch-depth: 0
-        - name: "Lint commit messages"
+        - name: Lint commit messages
           uses: wagoid/commitlint-github-action@v1
           with:
             failOnWarnings: true
     # Always lint
     lint_and_test:
-      name: "Linting and tests"
+      name: Linting and tests
       runs-on: ubuntu-latest
 
       steps:
-        - name: "Checkout code"
+        - name: Checkout code
           uses: actions/checkout@v2
 
-        - name: "Get python version"
+        - name: Get python version
           uses: outcome-co/action-read-toml@master
           id: python_version
           with:
             path: pyproject.toml
             key: tool.poetry.dependencies.python
 
-        - name: "Set up python ${{ steps.python_version.outputs.tool_poetry_dependencies_python }}"
+        - name: Set up python ${{ steps.python_version.outputs.tool_poetry_dependencies_python }}
           uses: actions/setup-python@v1
           with:
             python-version: ${{ steps.python_version.outputs.tool_poetry_dependencies_python }}
@@ -63,11 +63,11 @@ jobs:
             # All of the dependencies are stored in pyproject.toml
             key: poetry-${{ hashFiles('**/pyproject.toml') }}
 
-        - name: "Install dependencies"
+        - name: Install dependencies
           run: make ci-setup
 
-        - name: "Run linter"
+        - name: Run linter
           run: make lint
 
-        - name: "Run unit tests"
+        - name: Run unit tests
           run: make test
