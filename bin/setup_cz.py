@@ -68,13 +68,13 @@ def add_cz_config(toml_file):  # pragma: no cover
     logging.info(f'Version set to {version} with filepath {version_file}')
 
     cz_config = cz_config_template(version, version_file)
-    existing_config = get_existing_config(toml_file)
+    current_config = get_current_config(toml_file)
 
-    new_config = merge_existing_and_cz(existing_config, cz_config)
+    new_config = merge_current_and_cz(current_config, cz_config)
     write_new_config(toml_file, new_config)
 
 
-def get_existing_config(toml_file):  # pragma: no cover
+def get_current_config(toml_file):  # pragma: no cover
     if toml_file.exists():
         with open(toml_file, 'r') as f_read:
             return tomlkit.parse(f_read.read())
@@ -86,8 +86,8 @@ def write_new_config(toml_file, new_config):  # pragma: no cover
         f_write.write(tomlkit.dumps(new_config))
 
 
-def merge_existing_and_cz(existing_config, cz_config):
-    merged = existing_config.as_string() + cz_config.as_string()
+def merge_current_and_cz(current_config, cz_config):
+    merged = current_config.as_string() + cz_config.as_string()
     return tomlkit.parse(merged)
 
 
