@@ -11,7 +11,6 @@ import logging
 import sys
 from pathlib import Path
 
-import toml
 import tomlkit
 from tomlkit.toml_document import TOMLDocument
 
@@ -58,7 +57,9 @@ def is_cz_in_toml(toml_file: Path) -> bool:
     Returns:
         bool: True if the file contains CZ config
     """
-    toml_parsed = toml.load(toml_file)
+    with open(toml_file, 'r') as file:
+        toml_str = file.read()
+    toml_parsed = tomlkit.loads(toml_str)
     return 'commitizen' in toml_parsed['tool'].keys()
 
 
@@ -82,7 +83,9 @@ def get_current_version_info() -> (str, str):
         Tuple[str, Path]: The current version number and the version file.
     """
     if pyproject.exists():
-        parsed_toml = toml.load(pyproject)
+        with open(pyproject, 'r') as file:
+            toml_str = file.read()
+        parsed_toml = tomlkit.loads(toml_str)
         return parsed_toml['tool']['poetry']['version'], f'{pyproject}:version'
 
     if package_json.exists():
