@@ -76,33 +76,19 @@ class TestCzInToml:
     toml_not_configured = {'tool': {'poetry': {'name': 'test'}}}
 
     @pytest.mark.parametrize('test_input, expected', [(toml_configured, True), (toml_not_configured, False)])
-    @patch('toml.load', autospec=True)
-    def test_cz_is_in_toml(self, mock_toml_load, test_input, expected):
-        mock_toml_load.return_value = test_input
+    @patch('tomlkit.loads', autospec=True)
+    @patch('builtins.open', autospec=True)
+    def test_cz_is_in_toml(self, mock_open, mock_tomlkit_loads, test_input, expected):
+        mock_tomlkit_loads.return_value = test_input
         assert setup_cz.is_cz_in_toml('toml_file_configured') is expected
-
-
-class TestMergeExistingAndCz:
-    @pytest.fixture
-    def init_configs(self):
-        return tomlkit.document(), tomlkit.document()
-
-    def test_merge_empty_docs(self, init_configs):
-        merged = setup_cz.merge_existing_and_cz(init_configs[0], init_configs[1])
-        assert merged == tomlkit.document()
-
-    def test_merge_docs(self, init_configs):
-        init_configs[0].add('test_0', '0')
-        init_configs[1].add('test_1', '1')
-        merged = setup_cz.merge_existing_and_cz(init_configs[0], init_configs[1])
-        assert merged == {'test_0': '0', 'test_1': '1'}
 
 
 class TestGetCurrentVersion:
     @patch('pathlib.Path.exists', return_value=True, autospec=True)
-    @patch('toml.load', autospec=True)
-    def test_pyproject_exists(self, mock_toml_load, mock_path_exists):
-        mock_toml_load.return_value = {'tool': {'poetry': {'version': '1.1.1'}}}
+    @patch('tomlkit.loads', autospec=True)
+    @patch('builtins.open', autospec=True)
+    def test_pyproject_exists(self, mock_open, mock_tomlkit_loads, mock_path_exists):
+        mock_tomlkit_loads.return_value = {'tool': {'poetry': {'version': '1.1.1'}}}
         results = setup_cz.get_current_version_info()
         assert results == ('1.1.1', f'{setup_cz.pyproject}:version')
 
@@ -130,9 +116,25 @@ class TestGetCurrentVersion:
         assert results == (setup_cz.default_version, str(setup_cz.version_other))
 
 
-class TestCzConfigTemplate:
+class TestGetCzConfig:
     def test_template(self):
         version, version_file = '1.1.1', 'pyproject.toml:version'
-        template = setup_cz.cz_config_template(version, version_file)
+        template = setup_cz.get_cz_config(version, version_file)
         assert isinstance(template, tomlkit.toml_document.TOMLDocument)
         assert tomlkit.dumps(template) == TEST_CZ_TEMPLATE
+
+
+class TestMergeCurrentAndCz:
+    @pytest.fixture
+    def init_configs(self):
+        return tomlkit.document(), tomlkit.document()
+
+    def test_merge_empty_docs(self, init_configs):
+        merged = setup_cz.merge_current_and_cz(init_configs[0], init_configs[1])
+        assert merged == tomlkit.document()
+
+    def test_merge_docs(self, init_configs):
+        init_configs[0].add('test_0', '0')
+        init_configs[1].add('test_1', '1')
+        merged = setup_cz.merge_current_and_cz(init_configs[0], init_configs[1])
+        assert merged == {'test_0': '0', 'test_1': '1'}
