@@ -13,6 +13,7 @@ from pathlib import Path
 
 import toml
 import tomlkit
+from tomlkit.toml_document import TOMLDocument
 
 cz_toml = Path('.cz.toml')
 pyproject = Path('pyproject.toml')
@@ -30,7 +31,7 @@ version_files = []
 \n"""
 
 
-def main():
+def main() -> None:
     if pyproject.exists():
         if is_cz_in_toml(pyproject):
             logging.info(f'cz already configured in {pyproject}')
@@ -48,7 +49,7 @@ def main():
         add_cz_config(cz_toml)
 
 
-def is_cz_in_toml(toml_file):
+def is_cz_in_toml(toml_file: Path) -> bool:
     """Check if the TOML file contains CZ config.
 
     Args:
@@ -57,41 +58,24 @@ def is_cz_in_toml(toml_file):
     Returns:
         bool: True if the file contains CZ config
     """
-    parsed_toml = toml.load(toml_file)
-    return 'commitizen' in parsed_toml['tool'].keys()
+    toml_parsed = toml.load(toml_file)
+    return 'commitizen' in toml_parsed['tool'].keys()
 
 
-def add_cz_config(toml_file):  # pragma: no cover
+def add_cz_config(toml_file: Path) -> None:  # pragma: no cover
     logging.info(f'Adding Commitizen config to {toml_file}')
 
     version, version_file = get_current_version_info()
     logging.info(f'Version set to {version} with filepath {version_file}')
 
-    cz_config = cz_config_template(version, version_file)
+    cz_config = get_cz_config(version, version_file)
     current_config = get_current_config(toml_file)
 
     new_config = merge_current_and_cz(current_config, cz_config)
     write_new_config(toml_file, new_config)
 
 
-def get_current_config(toml_file):  # pragma: no cover
-    if toml_file.exists():
-        with open(toml_file, 'r') as f_read:
-            return tomlkit.parse(f_read.read())
-    return tomlkit.document()
-
-
-def write_new_config(toml_file, new_config):  # pragma: no cover
-    with open(toml_file, 'w') as f_write:
-        f_write.write(tomlkit.dumps(new_config))
-
-
-def merge_current_and_cz(current_config, cz_config):
-    merged = current_config.as_string() + cz_config.as_string()
-    return tomlkit.parse(merged)
-
-
-def get_current_version_info():
+def get_current_version_info() -> (str, str):
     """Determines the version file and current version.
 
     Returns:
@@ -115,11 +99,28 @@ def get_current_version_info():
     return default_version, str(version_other)
 
 
-def cz_config_template(version, version_file):
+def get_cz_config(version: str, version_file: str) -> TOMLDocument:
     cz_parsed = tomlkit.parse(CZ_TEMPLATE)
     cz_parsed['tool']['commitizen']['version'] = version
     cz_parsed['tool']['commitizen']['version_files'].append(version_file)
     return cz_parsed
+
+
+def get_current_config(toml_file: Path) -> TOMLDocument:  # pragma: no cover
+    if toml_file.exists():
+        with open(toml_file, 'r') as f_read:
+            return tomlkit.parse(f_read.read())
+    return tomlkit.document()
+
+
+def merge_current_and_cz(current_config: TOMLDocument, cz_config: TOMLDocument) -> TOMLDocument:
+    merged = current_config.as_string() + cz_config.as_string()
+    return tomlkit.parse(merged)
+
+
+def write_new_config(toml_file: Path, new_config: TOMLDocument) -> None:  # pragma: no cover
+    with open(toml_file, 'w') as f_write:
+        f_write.write(tomlkit.dumps(new_config))
 
 
 if __name__ == '__main__':  # pragma: no cover
