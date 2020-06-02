@@ -50,7 +50,7 @@ name = "cz_conventional_commits"
 version = "0.5.1"
 tag_format = "v$version"
 bump_message = "chore(version): $current_version → $new_version"
-version_files = [ "pyproject.toml:version", "action.yaml:image"]
+version_files = [ "pyproject.toml:version", "action.yaml:image", "README.md:version-badge"]
 
 [build-system]
 requires = ["poetry>=1.0.5"]
