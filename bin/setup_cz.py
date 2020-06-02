@@ -117,7 +117,10 @@ def get_current_config(toml_file: Path) -> TOMLDocument:  # pragma: no cover
 
 
 def merge_current_and_cz(current_config: TOMLDocument, cz_config: TOMLDocument) -> TOMLDocument:
+    # As current_config and cz_config are both already TOMLDocuments, the format returned by tomlkit method
+    # "as_string()" will include every details needed to preserve the TOMLDocument style when merging
     merged = current_config.as_string() + cz_config.as_string()
+    # Then we ensure the format is still valid by parsing the merged string in a TOMLDocument again
     return tomlkit.parse(merged)
 
 
