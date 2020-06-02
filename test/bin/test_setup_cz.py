@@ -17,12 +17,16 @@ version_files = ["pyproject.toml:version"]
 
 
 def side_effect_pyproject_false(arg):  # noqa: WPS430
+    # Side effect function to simulate the case when pyproject.toml doesn't exist
+    # but other files such as .cz.toml, package.json, or VERSION would exist
     if arg == setup_cz.pyproject:
         return False
     return True
 
 
 def side_effect_pyproject_and_package_false(arg):  # noqa: WPS430
+    # Side effect function to simulate the case when pyproject.toml and package.json
+    # don't exist but other files such as .cz.toml or VERSION would exist
     if arg in {setup_cz.pyproject, setup_cz.package_json}:
         return False
     return True
