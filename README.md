@@ -1,5 +1,5 @@
 # action-update-version
-![ci-badge-checks](https://github.com/outcome-co/action-update-version/workflows/Checks/badge.svg) 
+![ci-badge-checks](https://github.com/outcome-co/action-update-version/workflows/Checks/badge.svg) ![version-badge](https://img.shields.io/badge/version-0.5.1-brightgreen)
 
 This Github Action automatically updates the versions of your repositories.
 
@@ -29,9 +29,18 @@ Other types don't trigger any version bump.
 
 ## Usage
 
-First, the repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) set up for the Action to work.
+### Setup
+The repo should have [Commitizen](https://github.com/commitizen-tools/commitizen) set up for the Action to work.
 
-Then the Action should be used in a YAML in your Github Workflow: 
+To set up Commitizen on a repo, you can run
+```bash
+docker run -v $(pwd):/work -w /work outcomeco/action-update-version:latest init
+```
+This will add the configuration in `pyproject.toml` or `.cz.toml`.
+> Note: If Commitizen is already configured, it won't update the configuration.
+
+### Github Action
+The Action should be used in a YAML in your Github Workflow:
 
 ```yaml
 name: "Update Version"
