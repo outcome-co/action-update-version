@@ -37,7 +37,7 @@ docker-publish: docker-build ## Build and publish the docker image
 docker-info: ## Print useful info on the docker image
 	$(info ::set-output name=docker_registry::$(DOCKER_REGISTRY))
 	$(info ::set-output name=docker_tag::$(APP_VERSION))
-	$(info ::set-output name=docker_build_args::$(BUILD_SYSTEM_REQUIREMENTS))
+	$(info ::set-output name=docker_build_args:: BUILD_SYSTEM_REQUIREMENTS=$(BUILD_SYSTEM_REQUIREMENTS))
 	@#
 
 endif
