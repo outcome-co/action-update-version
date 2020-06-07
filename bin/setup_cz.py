@@ -26,7 +26,7 @@ name = "cz_conventional_commits"
 version = ""
 tag_format = "v$version"
 bump_message = "chore(version): $current_version → $new_version"
-version_files = []
+version_files = ["README.md:version-badge"]
 \n"""
 
 
