@@ -12,7 +12,7 @@ name = "cz_conventional_commits"
 version = "1.1.1"
 tag_format = "v$version"
 bump_message = "chore(version): $current_version → $new_version"
-version_files = ["pyproject.toml:version"]
+version_files = ["README.md:version-badge", "pyproject.toml:version"]
 \n"""
 
 
