@@ -119,7 +119,7 @@ description = "Python commitizen client tool"
 name = "commitizen"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.22.2"
+version = "1.22.3"
 
 [package.dependencies]
 colorama = ">=0.4.1,<0.5.0"
@@ -129,7 +129,6 @@ packaging = ">=19,<21"
 questionary = ">=1.4.0,<2.0.0"
 termcolor = ">=1.1,<2.0"
 tomlkit = ">=0.5.3,<0.6.0"
-typing = ">=3.7.4,<4.0.0"
 
 [[package]]
 category = "dev"
@@ -1126,14 +1125,6 @@ python-versions = "*"
 version = "1.4.1"
 
 [[package]]
-category = "main"
-description = "Type Hints for Python"
-name = "typing"
-optional = false
-python-versions = "*"
-version = "3.7.4.1"
-
-[[package]]
 category = "dev"
 description = "Backported and Experimental Type Hints for Python 3.5+"
 name = "typing-extensions"
@@ -1226,7 +1217,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "f94f6894bebcd179411dc1981f07fbacbfe1847369fad3ddd52841d939147ab9"
+content-hash = "bea60f6860586ba9f1b259c7f36363014968b5c34a412b341efea871f187ba4e"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1275,8 +1266,8 @@ colorama = [
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
 ]
 commitizen = [
-    {file = "commitizen-1.22.2-py3-none-any.whl", hash = "sha256:ecbbc35ce81ee1808ca1f524190bf3d32caae1f744632bce2dbbf30dd1308e1d"},
-    {file = "commitizen-1.22.2.tar.gz", hash = "sha256:071ca483fe73319642686fdd81b3f2d0443cc17bc84269da7b586ec52d7b4f21"},
+    {file = "commitizen-1.22.3-py3-none-any.whl", hash = "sha256:3536558871083cdb50b99357142baf3d0fd27c8b3b3e0d3f0f1c01ea11257105"},
+    {file = "commitizen-1.22.3.tar.gz", hash = "sha256:b136b459083333c0c64d6f826fa13a63e7703c4dfcdef1a45557933ba06ab4ba"},
 ]
 coverage = [
     {file = "coverage-5.1-cp27-cp27m-macosx_10_12_x86_64.whl", hash = "sha256:0cb4be7e784dcdc050fc58ef05b71aa8e89b7e6636b99967fadbdba694cf2b65"},
@@ -1727,11 +1718,6 @@ typed-ast = [
     {file = "typed_ast-1.4.1-cp38-cp38-win_amd64.whl", hash = "sha256:fc0fea399acb12edbf8a628ba8d2312f583bdbdb3335635db062fa98cf71fca4"},
     {file = "typed_ast-1.4.1-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:d43943ef777f9a1c42bf4e552ba23ac77a6351de620aa9acf64ad54933ad4d34"},
     {file = "typed_ast-1.4.1.tar.gz", hash = "sha256:8c8aaad94455178e3187ab22c8b01a3837f8ee50e09cf31f1ba129eb293ec30b"},
-]
-typing = [
-    {file = "typing-3.7.4.1-py2-none-any.whl", hash = "sha256:c8cabb5ab8945cd2f54917be357d134db9cc1eb039e59d1606dc1e60cb1d9d36"},
-    {file = "typing-3.7.4.1-py3-none-any.whl", hash = "sha256:f38d83c5a7a7086543a0f649564d661859c5146a85775ab90c0d2f93ffaa9714"},
-    {file = "typing-3.7.4.1.tar.gz", hash = "sha256:91dfe6f3f706ee8cc32d38edbbf304e9b7583fb37108fef38229617f8b3eba23"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.7.4.2-py2-none-any.whl", hash = "sha256:f8d2bd89d25bc39dabe7d23df520442fa1d8969b82544370e03d88b5a591c392"},
