@@ -3,7 +3,7 @@
 If there is a pyproject.toml file in the directory, we'll use that to store the cz config,
 otherwise we'll use .cz.toml.
 
-The script will detect the version files to update, either pyproject.toml, package.json, or VERSION.
+The script will detect the version files to update, either pyproject.toml, package.json, or config.cfg.
 """
 
 import json
@@ -17,7 +17,7 @@ from tomlkit.toml_document import TOMLDocument
 cz_toml = Path('.cz.toml')
 pyproject = Path('pyproject.toml')
 package_json = Path('package.json')
-version_other = Path('VERSION')
+version_other = Path('config.cfg')
 
 default_version = '0.1.0'
 
