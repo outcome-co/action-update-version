@@ -80,6 +80,9 @@ jobs:
         - name: Run tests
           run: make test
 
+        - name: Test Docker Build
+          run: make docker-build
+
     auto_merge_dependabot:
         name: Auto-approve dependabot pull requests
         runs-on: ubuntu-latest
