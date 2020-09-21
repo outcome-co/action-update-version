@@ -119,7 +119,7 @@ description = "Python commitizen client tool"
 name = "commitizen"
 optional = false
 python-versions = ">=3.6.1,<4.0.0"
-version = "2.3.1"
+version = "2.4.0"
 
 [package.dependencies]
 colorama = ">=0.4.1,<0.5.0"
@@ -1218,7 +1218,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "e2a201443594ab686d56b60b8acdf8d133c73945f78cbac9f649c6ad693d885b"
+content-hash = "7724bc3be5edf7b2e3f23b420f1fc0267ce1012e2b80bc67a8cad26fb298d2be"
 lock-version = "1.0"
 python-versions = "^3.7"
 
@@ -1268,8 +1268,8 @@ colorama = [
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
 ]
 commitizen = [
-    {file = "commitizen-2.3.1-py3-none-any.whl", hash = "sha256:8bd59e2546cb7ea330d2fb046e7d2809f30cc5655758ba35132b6259ecafd46a"},
-    {file = "commitizen-2.3.1.tar.gz", hash = "sha256:f55bd9a68fea1d6dac08f0d89b4fac74f97140c666446814baac8d52ddf55ee9"},
+    {file = "commitizen-2.4.0-py3-none-any.whl", hash = "sha256:72d918479a765749e6dc9ce49a4408bcf2bd776ceb3600a2296cfd8e696e7356"},
+    {file = "commitizen-2.4.0.tar.gz", hash = "sha256:b7d43a3f5411db0f6cde34e67807aac519e77d5062c2e5af203717158c5b5a77"},
 ]
 coverage = [
     {file = "coverage-5.1-cp27-cp27m-macosx_10_12_x86_64.whl", hash = "sha256:0cb4be7e784dcdc050fc58ef05b71aa8e89b7e6636b99967fadbdba694cf2b65"},
