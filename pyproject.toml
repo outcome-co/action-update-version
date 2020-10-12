@@ -53,5 +53,5 @@ bump_message = "chore(version): $current_version → $new_version"
 version_files = [ "pyproject.toml:version", "action.yaml:image", "README.md:version-badge"]
 
 [build-system]
-requires = ["poetry>=1.0.5"]
+requires = ["poetry==1.0.10"]
 build-backend = "poetry.masonry.api"
