@@ -36,6 +36,7 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             push: true
+            build-args: ${{ steps.docker_info.outputs.docker_build_args }}
             tags: |
               ${{  steps.docker_info.outputs.docker_registry }}:latest
               ${{  steps.docker_info.outputs.docker_registry }}:${{  steps.docker_info.outputs.docker_tag }}
