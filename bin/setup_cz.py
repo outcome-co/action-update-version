@@ -10,12 +10,14 @@ import json
 import logging
 import sys
 from pathlib import Path
+from typing import Tuple
 
 import tomlkit
 from tomlkit.toml_document import TOMLDocument
 
 cz_toml = Path('.cz.toml')
 pyproject = Path('pyproject.toml')
+cargo = Path('Cargo.toml')
 package_json = Path('package.json')
 version_other = Path('config.cfg')
 
@@ -30,14 +32,40 @@ version_files = ["README.md:version-badge"]
 \n"""
 
 
-def main() -> None:
-    if pyproject.exists():
+def _pyproject_exists():
+    return pyproject.exists()
+
+
+def _cargo_exists():
+    return cargo.exists()
+
+
+def _cz_toml_exists():
+    return cz_toml.exists()
+
+
+def _package_json_exists():
+    return package_json.exists()
+
+
+def _version_other_exists():
+    return version_other.exists()
+
+
+def main() -> None:  # noqa: WPS231 - too high complexity
+    if _pyproject_exists():
         if is_cz_in_toml(pyproject):
             logging.info(f'cz already configured in {pyproject}')
         else:
             add_cz_config(pyproject)
 
-    elif cz_toml.exists():
+    elif _cargo_exists():
+        if is_cz_in_toml(cargo):
+            logging.info(f'cz already configured in {cargo}')
+        else:
+            add_cz_config(cargo)
+
+    elif _cz_toml_exists():
         if not is_cz_in_toml(cz_toml):
             logging.error(f'{cz_toml} exists, but does not contain valid config!')
             sys.exit(-1)
@@ -76,23 +104,29 @@ def add_cz_config(toml_file: Path) -> None:  # pragma: no cover
     write_new_config(toml_file, new_config)
 
 
-def get_current_version_info() -> (str, str):
+def get_current_version_info() -> Tuple[str, str]:
     """Determines the version file and current version.
 
     Returns:
         Tuple[str, Path]: The current version number and the version file.
     """
-    if pyproject.exists():
-        with open(pyproject, 'r') as file:
-            toml_str = file.read()
-        parsed_toml = tomlkit.loads(toml_str)
+    if _pyproject_exists():
+        with open(pyproject, 'r') as py_file:
+            py_toml_str = py_file.read()
+        parsed_toml = tomlkit.loads(py_toml_str)
         return parsed_toml['tool']['poetry']['version'], f'{pyproject}:version'
 
-    if package_json.exists():
+    if _cargo_exists():
+        with open(cargo, 'r') as cargo_file:
+            cargo_toml_str = cargo_file.read()
+        parsed_toml = tomlkit.loads(cargo_toml_str)
+        return parsed_toml['package']['version'], f'{cargo}:version'
+
+    if _package_json_exists():
         parsed_json = json.load(open(package_json))  # noqa: WPS515
         return parsed_json['version'], f'{package_json}:version'
 
-    if version_other.exists():
+    if _version_other_exists():
         version = open(version_other, 'r').read().strip()  # noqa: WPS515
         return version, str(version_other)
 
