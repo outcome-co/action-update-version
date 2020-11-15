@@ -33,22 +33,6 @@ class TestMain:
             mock_add_cz_config.assert_called_with(setup_cz.pyproject)
 
     @patch('bin.setup_cz.is_cz_in_toml', return_value=True, autospec=True)
-    @patch('bin.setup_cz.add_cz_config', autospec=True)
-    def test_cargo_exist_and_configured(self, mock_add_cz_config, mock_is_cz_in_toml, mock_path_exists):
-        with patch('bin.setup_cz._cargo_exists', return_value=True, autospec=True) as mock_cargo_exists:
-            setup_cz.main()
-            mock_cargo_exists.assert_called_once()
-            mock_add_cz_config.assert_not_called()
-
-    @patch('bin.setup_cz.is_cz_in_toml', return_value=False, autospec=True)
-    @patch('bin.setup_cz.add_cz_config', autospec=True)
-    def test_cargo_exist_and_not_configured(self, mock_add_cz_config, mock_is_cz_in_toml, mock_path_exists):
-        with patch('bin.setup_cz._cargo_exists', return_value=True, autospec=True) as mock_cargo_exists:
-            setup_cz.main()
-            mock_cargo_exists.assert_called_once()
-            mock_add_cz_config.assert_called_with(setup_cz.cargo)
-
-    @patch('bin.setup_cz.is_cz_in_toml', return_value=True, autospec=True)
     @patch('logging.info', autospec=True)
     def test_cz_toml_exist_and_configured(self, mock_logging_info, mock_is_cz_in_toml, mock_path_exists):
         with patch('bin.setup_cz._cz_toml_exists', return_value=True, autospec=True) as mock_cz_exists:
@@ -92,13 +76,6 @@ class TestGetCurrentVersion:
             mock_tomlkit_loads.return_value = {'tool': {'poetry': {'version': '1.1.1'}}}
             results = setup_cz.get_current_version_info()
             assert results == ('1.1.1', f'{setup_cz.pyproject}:version')
-
-    @patch('bin.setup_cz.tomlkit.loads', autospec=True)
-    def test_cargo_exists(self, mock_tomlkit_loads, mock_open, mock_path_exists):
-        with patch('bin.setup_cz._cargo_exists', return_value=True, autospec=True):
-            mock_tomlkit_loads.return_value = {'package': {'version': '1.1.1'}}
-            results = setup_cz.get_current_version_info()
-            assert results == ('1.1.1', f'{setup_cz.cargo}:version')
 
     @patch('bin.setup_cz.json.load', autospec=True)
     def test_package_json_exists(self, mock_json_load, mock_open, mock_path_exists):
