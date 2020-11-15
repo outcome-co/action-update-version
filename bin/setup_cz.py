@@ -17,7 +17,6 @@ from tomlkit.toml_document import TOMLDocument
 
 cz_toml = Path('.cz.toml')
 pyproject = Path('pyproject.toml')
-cargo = Path('Cargo.toml')
 package_json = Path('package.json')
 version_other = Path('config.cfg')
 
@@ -34,10 +33,6 @@ version_files = ["README.md:version-badge"]
 
 def _pyproject_exists():
     return pyproject.exists()
-
-
-def _cargo_exists():
-    return cargo.exists()
 
 
 def _cz_toml_exists():
@@ -58,12 +53,6 @@ def main() -> None:  # noqa: WPS231 - too high complexity
             logging.info(f'cz already configured in {pyproject}')
         else:
             add_cz_config(pyproject)
-
-    elif _cargo_exists():
-        if is_cz_in_toml(cargo):
-            logging.info(f'cz already configured in {cargo}')
-        else:
-            add_cz_config(cargo)
 
     elif _cz_toml_exists():
         if not is_cz_in_toml(cz_toml):
@@ -115,12 +104,6 @@ def get_current_version_info() -> Tuple[str, str]:
             py_toml_str = py_file.read()
         parsed_toml = tomlkit.loads(py_toml_str)
         return parsed_toml['tool']['poetry']['version'], f'{pyproject}:version'
-
-    if _cargo_exists():
-        with open(cargo, 'r') as cargo_file:
-            cargo_toml_str = cargo_file.read()
-        parsed_toml = tomlkit.loads(cargo_toml_str)
-        return parsed_toml['package']['version'], f'{cargo}:version'
 
     if _package_json_exists():
         parsed_json = json.load(open(package_json))  # noqa: WPS515
