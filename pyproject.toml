@@ -10,7 +10,7 @@ commitizen = "^2.8.0"
 tomlkit = "0.5.11"
 
 [tool.poetry.dev-dependencies]
-outcome-devkit = "^3.3.6"
+outcome-devkit = "^3.4.0"
 
 [tool.docker]
 namespace = "outcomeco"
