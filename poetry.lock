@@ -15,6 +15,17 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "argcomplete"
+version = "1.12.2"
+description = "Bash tab completion for argparse"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+test = ["coverage", "flake8", "pexpect", "wheel"]
+
+[[package]]
 name = "asgiref"
 version = "3.3.1"
 description = "ASGI specs, helper code, and adapters"
@@ -156,13 +167,14 @@ python-versions = "*"
 
 [[package]]
 name = "commitizen"
-version = "2.8.2"
+version = "2.10.0"
 description = "Python commitizen client tool"
 category = "main"
 optional = false
 python-versions = ">=3.6.1,<4.0.0"
 
 [package.dependencies]
+argcomplete = ">=1.12.1,<2.0.0"
 colorama = ">=0.4.1,<0.5.0"
 decli = ">=0.5.2,<0.6.0"
 jinja2 = ">=2.10.3,<3.0.0"
@@ -1359,7 +1371,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8.6"
-content-hash = "3600ac3f30f78c5c5cf4c7b4f6ed73f718c6c557edcdec0e6b3b775874d248d3"
+content-hash = "3fb3b89a126441057f3fc3091cd686c14fb6257081799145ecc6a05887705b05"
 
 [metadata.files]
 appdirs = [
@@ -1369,6 +1381,10 @@ appdirs = [
 appnope = [
     {file = "appnope-0.1.0-py2.py3-none-any.whl", hash = "sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0"},
     {file = "appnope-0.1.0.tar.gz", hash = "sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71"},
+]
+argcomplete = [
+    {file = "argcomplete-1.12.2-py2.py3-none-any.whl", hash = "sha256:17f01a9b9b9ece3e6b07058eae737ad6e10de8b4e149105f84614783913aba71"},
+    {file = "argcomplete-1.12.2.tar.gz", hash = "sha256:de0e1282330940d52ea92a80fea2e4b9e0da1932aaa570f84d268939d1897b04"},
 ]
 asgiref = [
     {file = "asgiref-3.3.1-py3-none-any.whl", hash = "sha256:5ee950735509d04eb673bd7f7120f8fa1c9e2df495394992c73234d526907e17"},
@@ -1426,8 +1442,8 @@ colored = [
     {file = "colored-1.4.2.tar.gz", hash = "sha256:056fac09d9e39b34296e7618897ed1b8c274f98423770c2980d829fd670955ed"},
 ]
 commitizen = [
-    {file = "commitizen-2.8.2-py3-none-any.whl", hash = "sha256:924737f3341c2ff37396e2ab8a8002769905e1121596a7c57511b6ea69913780"},
-    {file = "commitizen-2.8.2.tar.gz", hash = "sha256:9a57c1d9951276cc48f2c57174aec599915cade83b6530d3b4846628866f1d45"},
+    {file = "commitizen-2.10.0-py3-none-any.whl", hash = "sha256:e2bb9baa0f4115d02a044a096cb90e5a9faa7b39e46a581530ce94d7578ae7e6"},
+    {file = "commitizen-2.10.0.tar.gz", hash = "sha256:33e515940e49355381d29f41081124c0203d92dfce399b82ea4b04a74fc16cba"},
 ]
 commonmark = [
     {file = "commonmark-0.9.1-py2.py3-none-any.whl", hash = "sha256:da2f38c92590f83de410ba1a3cbceafbc74fee9def35f9251ba9a971d6d66fd9"},
