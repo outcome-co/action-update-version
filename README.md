@@ -1,5 +1,5 @@
 # action-update-version
-![ci-badge-checks](https://github.com/outcome-co/action-update-version/workflows/Release/badge.svg?branch=v0.10.5) ![version-badge](https://img.shields.io/badge/version-0.10.5-brightgreen)
+![ci-badge-checks](https://github.com/outcome-co/action-update-version/workflows/Release/badge.svg?branch=v0.10.6) ![version-badge](https://img.shields.io/badge/version-0.10.6-brightgreen)
 
 This Github Action automatically updates the versions of your repositories.
 
