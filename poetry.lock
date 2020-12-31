@@ -167,7 +167,7 @@ python-versions = "*"
 
 [[package]]
 name = "commitizen"
-version = "2.12.0"
+version = "2.12.1"
 description = "Python commitizen client tool"
 category = "main"
 optional = false
@@ -1240,11 +1240,11 @@ python-versions = "*"
 
 [[package]]
 name = "tomlkit"
-version = "0.5.11"
+version = "0.7.0"
 description = "Style preserving TOML library"
 category = "main"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
 name = "traitlets"
@@ -1371,7 +1371,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8.6"
-content-hash = "00e72fb792823a3bdbba045ada85ad2485816a5ca4f50a0283b5191f6b514961"
+content-hash = "17582ff7a7b220a68f3a9fb64811d2296ec970274168aa8af6ff3070aa83d739"
 
 [metadata.files]
 appdirs = [
@@ -1442,8 +1442,8 @@ colored = [
     {file = "colored-1.4.2.tar.gz", hash = "sha256:056fac09d9e39b34296e7618897ed1b8c274f98423770c2980d829fd670955ed"},
 ]
 commitizen = [
-    {file = "commitizen-2.12.0-py3-none-any.whl", hash = "sha256:f0ba053b743e629c4e813033eff2438b6f02fca4e7c5aed68f011949fe32cc0c"},
-    {file = "commitizen-2.12.0.tar.gz", hash = "sha256:50cddcd1d07512fcf002dedf3ddf2c3ea78da0bc85793e01b7009627c96ef62d"},
+    {file = "commitizen-2.12.1-py3-none-any.whl", hash = "sha256:391d6c437528890cb1b75a2becbdb33d9f5b1659ed9096f918c332335e2f7284"},
+    {file = "commitizen-2.12.1.tar.gz", hash = "sha256:96d5ebf5a5ec4e2b7190611faaaff0b87246d753d933994b29a0125a939dd682"},
 ]
 commonmark = [
     {file = "commonmark-0.9.1-py2.py3-none-any.whl", hash = "sha256:da2f38c92590f83de410ba1a3cbceafbc74fee9def35f9251ba9a971d6d66fd9"},
@@ -1913,8 +1913,8 @@ toml = [
     {file = "toml-0.10.1.tar.gz", hash = "sha256:926b612be1e5ce0634a2ca03470f95169cf16f939018233a670519cb4ac58b0f"},
 ]
 tomlkit = [
-    {file = "tomlkit-0.5.11-py2.py3-none-any.whl", hash = "sha256:4e1bd6c9197d984528f9ff0cc9db667c317d8881288db50db20eeeb0f6b0380b"},
-    {file = "tomlkit-0.5.11.tar.gz", hash = "sha256:f044eda25647882e5ef22b43a1688fb6ab12af2fc50e8456cdfc751c873101cf"},
+    {file = "tomlkit-0.7.0-py2.py3-none-any.whl", hash = "sha256:6babbd33b17d5c9691896b0e68159215a9387ebfa938aa3ac42f4a4beeb2b831"},
+    {file = "tomlkit-0.7.0.tar.gz", hash = "sha256:ac57f29693fab3e309ea789252fcce3061e19110085aa31af5446ca749325618"},
 ]
 traitlets = [
     {file = "traitlets-5.0.4-py3-none-any.whl", hash = "sha256:9664ec0c526e48e7b47b7d14cd6b252efa03e0129011de0a9c1d70315d4309c3"},
