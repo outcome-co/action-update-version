@@ -2,4 +2,4 @@ name: action-update-version
 description: This Github Action automatically updates the versions of your repositories
 runs:
   using: docker
-  image: docker://outcomeco/action-update-version:0.10.7
+  image: docker://outcomeco/action-update-version:0.10.8
