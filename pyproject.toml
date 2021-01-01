@@ -6,7 +6,7 @@ authors = ["Flore de Lasteyrie <flore@outcome.co>"]
 
 [tool.poetry.dependencies]
 python = "~3.8.6"
-commitizen = "^2.12.0"
+commitizen = "^2.13.0"
 tomlkit = "0.7.0"
 
 [tool.poetry.dev-dependencies]
