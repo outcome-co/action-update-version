@@ -94,6 +94,19 @@ def poetry_in_toml(path: path.local) -> bool:
     return 'poetry' in tool.keys()
 
 
+def check_success(result: Result) -> None:
+    if result.exit_code == 0:
+        return
+
+    print(result.stderr)  # noqa: T001, WPS421
+    print(result.stdout)  # noqa: T001, WPS421
+
+    if result.exception:
+        print(result.exception)  # noqa: T001, WPS421
+
+    assert result.exit_code == 0
+
+
 @pytest.mark.usefixtures('tmp_commitizen_project')
 class TestBump:
     def test_bump(self, tmp_commitizen_project: path.local):
