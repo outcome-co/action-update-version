@@ -1,27 +1,33 @@
-FROM python:3.8 AS build-env
+# syntax = docker/dockerfile:1.0-experimental
+
+FROM python:3.8 AS build-dependencies
 
 ARG BUILD_SYSTEM_REQUIREMENTS
 
-WORKDIR /build
+WORKDIR /app
 
-COPY Makefile poetry.lock pyproject.toml /build/
+COPY Makefile poetry.lock pyproject.toml ./
+COPY make/ ./make/
 
-# We need the Makefiles on this path so we can still "include make/*.Makefile"
-COPY make/ /build/make/
-
-# Provide the BUILD_SYSTEM_ARGUMENTS to the Makefile
-RUN BUILD_SYSTEM_REQUIREMENTS=${BUILD_SYSTEM_REQUIREMENTS} make install-build-system
-RUN poetry export -f requirements.txt -o requirements.txt --without-hashes 
+# We remove version from pyproject, 
+# that way if dependencies have not changed, docker won't rebuild previous steps
+RUN make cache-friendly-pyproject
+RUN make production-setup
 
 FROM python:3.8-slim-buster
 
-RUN apt-get update && apt-get install -y --no-install-recommends git  
+ARG APP_VENV=/app/.venv
+ARG APP_SITE_PACKAGES=${APP_VENV}/lib/python3.8/site-packages/
 
+RUN apt-get update && apt-get install -y --no-install-recommends 'git=1:2.20.1-2+deb10u3' && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy dependencies
+# We commit after these steps to cache setup and dependencies copy
+COPY --from=build-dependencies ${APP_VENV} ${APP_VENV}
 WORKDIR /app
 
-COPY --from=build-env /build/requirements.txt /app/
-COPY ./bin /app/bin
+COPY src/ ./src/
 
-RUN pip install --no-cache -r requirements.txt
+ENV PYTHONPATH=/app/src:${APP_SITE_PACKAGES} PATH=${PATH}:${APP_VENV}/bin
 
-ENTRYPOINT [ "/app/bin/entrypoint.sh" ]
+ENTRYPOINT [ "python", "/app/src/action.py" ]
