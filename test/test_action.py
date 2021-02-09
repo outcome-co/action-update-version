@@ -94,8 +94,8 @@ def poetry_in_toml(path: path.local) -> bool:
     return 'poetry' in tool.keys()
 
 
-def check_success(result: Result) -> None:
-    if result.exit_code == 0:
+def check_exit_code(result: Result, expected_code: int = 0) -> None:
+    if result.exit_code == expected_code:
         return
 
     print(result.stderr)  # noqa: T001, WPS421
@@ -104,7 +104,7 @@ def check_success(result: Result) -> None:
     if result.exception:
         print(result.exception)  # noqa: T001, WPS421
 
-    assert result.exit_code == 0
+    assert result.exit_code == expected_code
 
 
 @pytest.mark.usefixtures('tmp_commitizen_project')
@@ -118,7 +118,7 @@ class TestBump:
 
         result = runner.invoke(action.app, ['bump'])
 
-        assert result.exit_code == 0
+        check_exit_code(result)
         assert github_variable_set(result, 'updated', 'true')
         assert github_variable_set(result, 'version', '0.2.0')
 
@@ -131,7 +131,7 @@ class TestBump:
 
         result = runner.invoke(action.app, ['bump'])
 
-        assert result.exit_code == 0
+        check_exit_code(result)
         assert github_variable_set(result, 'updated', 'false')
         assert github_variable_set(result, 'version', '0.1.0')
 
@@ -143,7 +143,7 @@ class TestInitPyProject:
 
         result = runner.invoke(action.app, ['init'])
 
-        assert result.exit_code == _already_exists_exit_code
+        check_exit_code(result, _already_exists_exit_code)
         assert 'cz already configured' in result.stderr
 
     def test_add_config(self, clean_dir: path.local):
@@ -152,7 +152,7 @@ class TestInitPyProject:
 
         result = runner.invoke(action.app, ['init'])
 
-        assert result.exit_code == 0
+        check_exit_code(result)
         assert 'Adding Commitizen config to' in result.stdout
         assert commitizen_in_toml(pyproject, '0.10.8')
         assert poetry_in_toml(pyproject)
@@ -162,7 +162,7 @@ class TestInitNonPyproject:
     def test_add_config(self, clean_dir: path.local):
         result = runner.invoke(action.app, ['init'])
 
-        assert result.exit_code == 0
+        check_exit_code(result)
         assert 'Adding Commitizen config to' in result.stdout
 
         cz_toml = clean_dir.join('.cz.toml')
@@ -174,7 +174,7 @@ class TestInitNonPyproject:
 
         result = runner.invoke(action.app, ['init'])
 
-        assert result.exit_code == _misconfigured
+        check_exit_code(result, _misconfigured)
         assert 'but does not contain valid config' in result.stderr
 
     def test_already_configured(self, clean_dir: path.local):
@@ -183,7 +183,7 @@ class TestInitNonPyproject:
 
         result = runner.invoke(action.app, ['init'])
 
-        assert result.exit_code == _already_exists_exit_code
+        check_exit_code(result, _already_exists_exit_code)
         assert 'cz already configured in' in result.stderr
 
 
@@ -218,7 +218,7 @@ class TestAddCzInfo:
 
         result = runner.invoke(action.app, ['init'])
 
-        assert result.exit_code == 0
+        check_exit_code(result)
 
         cz_toml = clean_dir.join('.cz.toml')
         assert commitizen_in_toml(cz_toml, '1.2.3', ['config.cfg', 'README.md:version-badge'])
@@ -229,7 +229,7 @@ class TestAddCzInfo:
 
         result = runner.invoke(action.app, ['init'])
 
-        assert result.exit_code == 0
+        check_exit_code(result)
 
         contents = pyproject.read_text('utf-8')
         assert contents == snapshot
