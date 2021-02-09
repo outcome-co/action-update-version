@@ -8,9 +8,11 @@ authors = ["Flore de Lasteyrie <flore@outcome.co>"]
 python = "~3.8.6"
 commitizen = "^2.13.0"
 tomlkit = "0.7.0"
+typer = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 outcome-devkit = "^3.5.12"
+syrupy = "^1.1.0"
 
 [tool.docker]
 namespace = "outcomeco"
@@ -37,13 +39,26 @@ exclude = '''
 
 [tool.isort]
 skip_glob = "*/.cache/**/*"
+line_length = 130
+include_trailing_comma = true
+multi_line_output = 3
 
 [tool.coverage.run]
 branch = true
-omit = ["*/.pyenv/*", "*/virtualenvs/*", "**/test/*"]
+data_file = 'coverage/data'
+source = ['src']
+omit = [
+   "test/*"
+]
+plugins = ["outcome.devkit.env_coverage"]
 
 [tool.coverage.report]
 fail_under = 100
+skip_empty = true
+
+[tool.coverage.html]
+show_contexts = true
+directory = 'coverage/html'
 
 [tool.commitizen]
 name = "cz_conventional_commits"

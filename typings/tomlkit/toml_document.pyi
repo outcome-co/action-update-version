@@ -1,0 +1,3 @@
+from tomlkit.container import Container
+
+class TOMLDocument(Container): ...
