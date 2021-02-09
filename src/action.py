@@ -40,7 +40,13 @@ def bump():
 
 def run(command: str) -> cmd.Command:
     result = cmd.run(command)
-    assert result.return_code == 0  # noqa: S101
+
+    if result.return_code != 0:  # pragma: no cover
+        typer.echo('Command failed!', err=True)
+        typer.echo(f'stdout: {result.out}', err=True)
+        typer.echo(f'stderr: {result.err}', err=True)
+        sys.exit(-1)
+
     return result
 
 
