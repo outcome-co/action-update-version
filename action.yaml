@@ -3,3 +3,5 @@ description: This Github Action automatically updates the versions of your repos
 runs:
   using: docker
   image: docker://outcomeco/action-update-version:0.10.8
+  args:
+    - 'bump'
