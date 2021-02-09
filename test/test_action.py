@@ -43,6 +43,8 @@ def clean_dir(tmpdir: path.local) -> Generator[path.local, None, None]:
 def tmp_git_project(clean_dir: path.local) -> Generator[path.local, None, None]:
     with clean_dir.as_cwd():
         action.run('git init')
+        action.run('git config --local user.email "test@outcome.co"')
+        action.run('git config --local user.name "Test User"')
         yield clean_dir
 
 
