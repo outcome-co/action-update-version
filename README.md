@@ -1,5 +1,5 @@
 # action-update-version
-!![Continuous Integration](https://github.com/outcome-co/action-update-version/workflows/Continuous%20Integration/badge.svg) ![version-badge](https://img.shields.io/badge/version-2.0.0-brightgreen)
+![Continuous Integration](https://github.com/outcome-co/action-update-version/workflows/Continuous%20Integration/badge.svg) ![version-badge](https://img.shields.io/badge/version-2.0.0-brightgreen)
 
 This Github Action automatically updates the versions of your repositories.
 
