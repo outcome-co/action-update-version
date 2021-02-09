@@ -1,10 +1,9 @@
 repos:
-  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v3.0.0
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.14.0
     hooks:
-      - id: commitlint
+      - id: commitizen
         stages: [commit-msg]
-        additional_dependencies: ['@commitlint/config-conventional']
 
   # Stop commits to master
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -16,20 +15,20 @@ repos:
   - repo: local
     hooks:
   
-    # - id: autoupdate
-    #   name: autoupdate
-    #   language: system  # Running on the local system
-    #   stages: [push]
-    #   verbose: true
-    #   entry: pre-commit autoupdate
-    #   pass_filenames: false
+    - id: autoupdate
+      name: autoupdate
+      language: system  # Running on the local system
+      stages: [push]
+      verbose: true
+      entry: pre-commit autoupdate
+      pass_filenames: false
 
     - id: lint
       name: lint
       language: system  # Running on the local system
       stages: [commit, push]
       verbose: true
-      entry: sh -c "CI=true make lint"
+      entry: make lint
       types: [file, python]  # Only triggered if python files are changed in the commit
       pass_filenames: false
   
@@ -38,6 +37,6 @@ repos:
       language: system  # Running on the local system
       stages: [push]
       verbose: true
-      entry: sh -c "CI=true make test"
+      entry: make test
       types: [file, python]  # Only triggered if python files are changed in the commit
       pass_filenames: false
