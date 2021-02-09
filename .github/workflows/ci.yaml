@@ -149,7 +149,7 @@ jobs:
         # If we've created a new version, push it
         - name: Push new version
           if: github.event_name == 'push' && steps.bump_version.outputs.updated == 'true'
-          run: git push origin HEAD:master --follow-tags
+          run: git push origin HEAD:master --follow-tags && git push origin HEAD:master --tags
 
         # We rebuild the image with the new tag, the image is cached so the build is fast
         - name: Push Docker image
