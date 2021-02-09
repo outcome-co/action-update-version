@@ -11,8 +11,8 @@ tomlkit = "0.7.0"
 typer = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
-outcome-devkit = "^3.5.12"
 syrupy = "^1.1.0"
+outcome-devkit = "^4.1.1"
 
 [tool.docker]
 registry = "docker.io"
