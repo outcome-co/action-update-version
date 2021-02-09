@@ -6,7 +6,6 @@ from typing import Generator, List, Optional
 import pytest
 import tomlkit
 from click.testing import Result
-from commitizen import cmd
 from py import path
 from syrupy.assertion import SnapshotAssertion
 from tomlkit.items import String, Table
@@ -43,7 +42,7 @@ def clean_dir(tmpdir: path.local) -> Generator[path.local, None, None]:
 @pytest.fixture()
 def tmp_git_project(clean_dir: path.local) -> Generator[path.local, None, None]:
     with clean_dir.as_cwd():
-        cmd.run('git init')
+        action.run('git init')
         yield clean_dir
 
 
@@ -53,8 +52,8 @@ def tmp_commitizen_project(tmp_git_project: path.local) -> Generator[path.local,
         tmp_commitizen_cfg_file = tmp_git_project.join('pyproject.toml')
         tmp_commitizen_cfg_file.write('[tool.commitizen]\nversion="0.1.0"\n')
 
-        cmd.run('git add pyproject.toml')
-        cmd.run('git commit -m "build: add pyproject.toml"')
+        action.run('git add pyproject.toml')
+        action.run('git commit -m "build: add pyproject.toml"')
 
         yield tmp_git_project
 
@@ -113,8 +112,8 @@ class TestBump:
         some_file = tmp_commitizen_project.join('some_file')
         some_file.write('content')
 
-        cmd.run('git add some_file')
-        cmd.run('git commit -m "feat: add some_file"')
+        action.run('git add some_file')
+        action.run('git commit -m "feat: add some_file"')
 
         result = runner.invoke(action.app, ['bump'])
 
@@ -126,8 +125,8 @@ class TestBump:
         some_file = tmp_commitizen_project.join('some_file')
         some_file.write('content')
 
-        cmd.run('git add some_file')
-        cmd.run('git commit -m "chore: add some_file"')
+        action.run('git add some_file')
+        action.run('git commit -m "chore: add some_file"')
 
         result = runner.invoke(action.app, ['bump'])
 
