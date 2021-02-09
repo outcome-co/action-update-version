@@ -84,6 +84,11 @@ jobs:
             ref: ${{ github.sha }}
             token: ${{ secrets.OTTO_TOKEN }}
 
+        - name: Configure Otto
+          run: |
+            git config --local user.email "otc-builder@outcome.co"
+            git config --local user.name "Otto the Bot"
+
         - name: Check TODOs
           uses: outcome-co/action-check-todos@v1.7.5
           with:
@@ -134,12 +139,6 @@ jobs:
 
         # From here on, all checks and tests have passed, and we're heading for a release
         # if we're merging into master (i.e. not pull requests or repository_dispatch)
-
-        - name: Configure Otto
-          if: github.event_name == 'push'
-          run: |
-            git config --local user.email "otc-builder@outcome.co"
-            git config --local user.name "Otto the Bot"
 
         # This creates a new commit and tag if we're bumping
         - name: Bump version
