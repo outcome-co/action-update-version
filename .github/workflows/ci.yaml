@@ -43,7 +43,7 @@ jobs:
           with:
             failOnWarnings: true
 
-        - uses: amannn/action-semantic-pull-request@v3.2.6
+        - uses: amannn/action-semantic-pull-request@v3.3.0
           if: github.event_name == 'pull_request'
 
     docker_lint:
