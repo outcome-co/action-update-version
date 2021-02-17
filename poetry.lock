@@ -185,17 +185,6 @@ python-versions = "*"
 pygments = "*"
 
 [[package]]
-name = "colorlog"
-version = "4.7.2"
-description = "Log formatting with colors!"
-category = "dev"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-colorama = {version = "*", markers = "sys_platform == \"win32\""}
-
-[[package]]
 name = "commitizen"
 version = "2.14.2"
 description = "Python commitizen client tool"
@@ -776,37 +765,8 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "nox"
-version = "2020.12.31"
-description = "Flexible test automation."
-category = "dev"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-argcomplete = ">=1.9.4,<2.0"
-colorlog = ">=2.6.1,<5.0.0"
-py = ">=1.4.0,<2.0.0"
-virtualenv = ">=14.0.0"
-
-[package.extras]
-tox_to_nox = ["jinja2", "tox"]
-
-[[package]]
-name = "nox-poetry"
-version = "0.8.1"
-description = "nox-poetry"
-category = "dev"
-optional = false
-python-versions = ">=3.6.1,<4.0.0"
-
-[package.dependencies]
-nox = ">=2020.5.24,<2021.0.0"
-tomlkit = ">=0.7.0,<0.8.0"
-
-[[package]]
 name = "outcome-devkit"
-version = "5.0.2"
+version = "5.1.0"
 description = "A package containing common dev dependencies for python projects."
 category = "dev"
 optional = false
@@ -830,15 +790,16 @@ flake8-return = ">=1.1.1,<2.0.0"
 ipython = ">=7.13.0,<8.0.0"
 isort = ">=4.3.21,<5.0.0"
 magicinvoke = ">=2.4.5,<3.0.0"
-nox = ">=2020.12.31,<2021.0.0"
-nox-poetry = ">=0.8.1,<0.9.0"
 outcome-read-toml = ">=2.1.1,<3.0.0"
-outcome-utils = ">=4.25.1,<5.0.0"
+outcome-stubs = ">=0.3.0,<0.4.0"
+outcome-utils = ">=5.0.0,<6.0.0"
 pactman = ">=2.28.0,<3.0.0"
 pdbpp = ">=0.10.2,<0.11.0"
 pre-commit = ">=2.10.1,<3.0.0"
+pydantic = ">=1.7.3,<2.0.0"
 pytest = ">=5.3.5,<7.0.0"
 pytest-asyncio = ">=0.12,<0.15"
+rich = ">=9.11.0,<10.0.0"
 wemake-python-styleguide = ">=0.14.0,<0.15.0"
 
 [[package]]
@@ -854,8 +815,19 @@ click = ">=7.1.2,<8.0.0"
 toml = ">=0.10.1,<0.11.0"
 
 [[package]]
+name = "outcome-stubs"
+version = "0.3.0"
+description = "Stub files for various python packages."
+category = "dev"
+optional = false
+python-versions = ">=3.8.6,<4.0.0"
+
+[package.dependencies]
+pactman = ">=2.28.0,<3.0.0"
+
+[[package]]
 name = "outcome-utils"
-version = "4.25.1"
+version = "5.0.0"
 description = "A collection of python utils."
 category = "dev"
 optional = false
@@ -869,7 +841,6 @@ colored = ">=1.4.2,<2.0.0"
 jinja2 = ">=2.11.2,<3.0.0"
 makefun = ">=1.9.3,<2.0.0"
 pydantic = ">=1.7.3,<2.0.0"
-pyfakefs = ">=4.1.0,<5.0.0"
 python-dotenv = ">=0.15.0,<0.16.0"
 requests = ">=2.24.0,<3.0.0"
 rich = ">=6.2,<10.0"
@@ -1075,14 +1046,6 @@ python-versions = ">=3.5"
 snowballstemmer = "*"
 
 [[package]]
-name = "pyfakefs"
-version = "4.3.3"
-description = "pyfakefs implements a fake file system that mocks the Python file system modules."
-category = "dev"
-optional = false
-python-versions = ">=3.5"
-
-[[package]]
 name = "pyflakes"
 version = "2.2.0"
 description = "passive checker of Python programs"
@@ -1246,7 +1209,7 @@ docutils = ">=0.11,<1.0"
 
 [[package]]
 name = "rich"
-version = "9.10.0"
+version = "9.11.0"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 category = "dev"
 optional = false
@@ -1500,7 +1463,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8.6"
-content-hash = "59a645bd1c5321f2fc155b5c9b1aff4cb8f9c6cf84d250cbaf18ad9c800ae14f"
+content-hash = "358b44f5f26e5839913b4d4035a1d48c94767b3d79dcb3e0f5aabe05ae40deeb"
 
 [metadata.files]
 appdirs = [
@@ -1577,10 +1540,6 @@ colored = [
 colored-traceback = [
     {file = "colored-traceback-0.3.0.tar.gz", hash = "sha256:6da7ce2b1da869f6bb54c927b415b95727c4bb6d9a84c4615ea77d9872911b05"},
     {file = "colored_traceback-0.3.0-py2-none-any.whl", hash = "sha256:f76c21a4b4c72e9e09763d4d1b234afc469c88693152a763ad6786467ef9e79f"},
-]
-colorlog = [
-    {file = "colorlog-4.7.2-py2.py3-none-any.whl", hash = "sha256:0a9dcdba6cab68e8a768448b418a858d73c52b37b6e8dea2568296faece393bd"},
-    {file = "colorlog-4.7.2.tar.gz", hash = "sha256:18d05b616438a75762d7d214b9ec3b05d274466c9f3ddd92807e755840c88251"},
 ]
 commitizen = [
     {file = "commitizen-2.14.2-py3-none-any.whl", hash = "sha256:9033e5bd266f08d88a84e62345a70c442d1a5f69d25f45ca492a669be1e907ba"},
@@ -1879,25 +1838,21 @@ nodeenv = [
     {file = "nodeenv-1.5.0-py2.py3-none-any.whl", hash = "sha256:5304d424c529c997bc888453aeaa6362d242b6b4631e90f3d4bf1b290f1c84a9"},
     {file = "nodeenv-1.5.0.tar.gz", hash = "sha256:ab45090ae383b716c4ef89e690c41ff8c2b257b85b309f01f3654df3d084bd7c"},
 ]
-nox = [
-    {file = "nox-2020.12.31-py3-none-any.whl", hash = "sha256:f179d6990f7a0a9cebad01b9ecea34556518b8d3340dfcafdc1d85f2c1a37ea0"},
-    {file = "nox-2020.12.31.tar.gz", hash = "sha256:58a662070767ed4786beb46ce3a789fca6f1e689ed3ac15c73c4d0094e4f9dc4"},
-]
-nox-poetry = [
-    {file = "nox-poetry-0.8.1.tar.gz", hash = "sha256:e613716b67166de1dbe787ba8f0a6fe64a6c48b8fa553ad9fc399a9e51478bcc"},
-    {file = "nox_poetry-0.8.1-py3-none-any.whl", hash = "sha256:5a391ff3ab5fa4023f4cdf38a214dd72465d8731f2635657e50f0f6e24f8a404"},
-]
 outcome-devkit = [
-    {file = "outcome-devkit-5.0.2.tar.gz", hash = "sha256:0e0ad6d6a6d3c9b59fcd84cdfe030da2260f97c281ac69001d84ebd44e01faab"},
-    {file = "outcome_devkit-5.0.2-py3-none-any.whl", hash = "sha256:281a4bddbb83a50b7de9547cb2333953ed4d2852cd2c1306992b1f40f262da21"},
+    {file = "outcome-devkit-5.1.0.tar.gz", hash = "sha256:9388452f8047f081d9b4d642e34f57314d8888366f938ff1ac9e5a1eabbaeff2"},
+    {file = "outcome_devkit-5.1.0-py3-none-any.whl", hash = "sha256:a5faf2724df15a8f1bd1661edd17175c861ce8fbcb98a26e7eca7f922849bd23"},
 ]
 outcome-read-toml = [
     {file = "outcome-read-toml-2.1.1.tar.gz", hash = "sha256:aa5752e2b1f4b8ac6d13629210b5b79a3b3663cdfaf30175d23eb30a4b48702f"},
     {file = "outcome_read_toml-2.1.1-py3-none-any.whl", hash = "sha256:e90d65a1e4c6453329ee8b02b95528c2d3a8131662b91f6c2e015fdcf5f277f5"},
 ]
+outcome-stubs = [
+    {file = "outcome-stubs-0.3.0.tar.gz", hash = "sha256:8d6fb8ad01190cd913a49264d75f8abe167fe77a4de59dc131c69bb8f5924f25"},
+    {file = "outcome_stubs-0.3.0-py3-none-any.whl", hash = "sha256:051cc29fe4288f01b4407b5ec87c19a1a1041ff79b18d860d209e9313f2dee7d"},
+]
 outcome-utils = [
-    {file = "outcome-utils-4.25.1.tar.gz", hash = "sha256:1fe95cf0652b4d1c99cceab7663ef176426a86d76d46c03e2d16c9efa2068388"},
-    {file = "outcome_utils-4.25.1-py3-none-any.whl", hash = "sha256:0c89e1e8838354827bd4941dcd96116d8e795748676f5877f7c218f1c968eab0"},
+    {file = "outcome-utils-5.0.0.tar.gz", hash = "sha256:977ba8b0be5cf4b45b1b245bcd8f46dd4f021f1dfb7eca23769e1bad623cac41"},
+    {file = "outcome_utils-5.0.0-py3-none-any.whl", hash = "sha256:f083ce4d19a5c45fac7b02ba167de5a09c0f6ebfce25e540adb46d97c938a62a"},
 ]
 packaging = [
     {file = "packaging-20.9-py2.py3-none-any.whl", hash = "sha256:67714da7f7bc052e064859c05c595155bd1ee9f69f76557e21f051443c20947a"},
@@ -1988,10 +1943,6 @@ pydantic = [
 pydocstyle = [
     {file = "pydocstyle-5.1.1-py3-none-any.whl", hash = "sha256:aca749e190a01726a4fb472dd4ef23b5c9da7b9205c0a7857c06533de13fd678"},
     {file = "pydocstyle-5.1.1.tar.gz", hash = "sha256:19b86fa8617ed916776a11cd8bc0197e5b9856d5433b777f51a3defe13075325"},
-]
-pyfakefs = [
-    {file = "pyfakefs-4.3.3-py3-none-any.whl", hash = "sha256:b2bc190ea65b5b6274c6d1a90c4d71ede9b3178e1ff9bb74c86daf69ffccd185"},
-    {file = "pyfakefs-4.3.3.tar.gz", hash = "sha256:ffb2ab264a0b83af548a2db0c509798e208361df39601ba898ae65cecfb59cbb"},
 ]
 pyflakes = [
     {file = "pyflakes-2.2.0-py2.py3-none-any.whl", hash = "sha256:0d94e0e05a19e57a99444b6ddcf9a6eb2e5c68d3ca1e98e90707af8152c90a92"},
@@ -2108,8 +2059,8 @@ restructuredtext-lint = [
     {file = "restructuredtext_lint-1.3.2.tar.gz", hash = "sha256:d3b10a1fe2ecac537e51ae6d151b223b78de9fafdd50e5eb6b08c243df173c80"},
 ]
 rich = [
-    {file = "rich-9.10.0-py3-none-any.whl", hash = "sha256:3070d53e3a93864de351c1091af1deb25f41e6051b33e485d4626b591c0cfdb3"},
-    {file = "rich-9.10.0.tar.gz", hash = "sha256:e0f2db62a52536ee32f6f584a47536465872cae2b94887cf1f080fb9eaa13eb2"},
+    {file = "rich-9.11.0-py3-none-any.whl", hash = "sha256:a8ee22199562278d2f78148cacb2f9460ccac362cd4a40f705505b41daae60e0"},
+    {file = "rich-9.11.0.tar.gz", hash = "sha256:f8f08fdac6bd67dc2dd7fe976da702d748487aa9eb5d050c48b2321bc67ed659"},
 ]
 semver = [
     {file = "semver-2.13.0-py2.py3-none-any.whl", hash = "sha256:ced8b23dceb22134307c1b8abfa523da14198793d9787ac838e70e29e77458d4"},
