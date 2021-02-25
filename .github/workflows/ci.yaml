@@ -39,7 +39,7 @@ jobs:
 
         - name: Lint commit messages
           if: github.event_name != 'repository_dispatch'
-          uses: wagoid/commitlint-github-action@v2
+          uses: wagoid/commitlint-github-action@v3
           with:
             failOnWarnings: true
 
