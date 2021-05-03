@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "action-update-version"
-version = "2.0.2"
+version = "2.0.3"
 description = "This Github Action automatically updates the versions of your repositories."
 authors = ["Flore de Lasteyrie <flore@outcome.co>"]
 
@@ -63,7 +63,7 @@ directory = 'coverage/html'
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "2.0.2"
+version = "2.0.3"
 tag_format = "v$version"
 bump_message = "chore(version): $current_version → $new_version"
 version_files = [ "pyproject.toml:version", "action.yaml:image", "README.md:version-badge"]
