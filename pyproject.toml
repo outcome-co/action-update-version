@@ -12,7 +12,7 @@ typer = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 syrupy = "^1.1.0"
-outcome-devkit = "^6.3.0"
+outcome-devkit = "7.2.0b2"
 
 [tool.docker]
 registry = "docker.io"
@@ -69,5 +69,5 @@ bump_message = "chore(version): $current_version → $new_version"
 version_files = [ "pyproject.toml:version", "action.yaml:image", "README.md:version-badge"]
 
 [build-system]
-requires = ["poetry==1.1.4"]
+requires = ["poetry==1.1.5"]
 build-backend = "poetry.masonry.api"

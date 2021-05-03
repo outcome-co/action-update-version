@@ -2,17 +2,12 @@
 
 FROM python:3.8 AS build-dependencies
 
-ARG BUILD_SYSTEM_REQUIREMENTS
-
 WORKDIR /app
 
-COPY Makefile poetry.lock pyproject.toml ./
-COPY make/ ./make/
+COPY bootstrap.sh tasks.py poetry.lock pyproject.toml ./
+RUN ./bootstrap.sh --build-system-only
 
-# We remove version from pyproject, 
-# that way if dependencies have not changed, docker won't rebuild previous steps
-RUN make cache-friendly-pyproject
-RUN make production-setup
+RUN inv setup.production
 
 FROM python:3.8-slim-buster
 

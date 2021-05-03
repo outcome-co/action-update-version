@@ -116,8 +116,8 @@ T = TypeVar('T', Table, Container, Item)
 
 def get_from_toml(toml: Union[Container, Table], key: str, expected_type: Type[T]) -> T:
     result = toml[key]
-    assert isinstance(result, expected_type)  # noqa: S101
-    return result
+    assert isinstance(result, cast(type, expected_type))  # noqa: S101
+    return cast(T, result)
 
 
 def is_cz_in_toml(toml_file: Path) -> bool:
