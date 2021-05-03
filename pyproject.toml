@@ -5,14 +5,14 @@ description = "This Github Action automatically updates the versions of your rep
 authors = ["Flore de Lasteyrie <flore@outcome.co>"]
 
 [tool.poetry.dependencies]
-python = "~3.8.6"
-commitizen = "^2.15.3"
+python = "^3.8.6"
+commitizen = "^2.17.4"
 tomlkit = "0.7.0"
 typer = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 syrupy = "^1.1.0"
-outcome-devkit = "^6.3.0"
+outcome-devkit = "^7.2.0"
 
 [tool.docker]
 registry = "docker.io"
@@ -69,5 +69,5 @@ bump_message = "chore(version): $current_version → $new_version"
 version_files = [ "pyproject.toml:version", "action.yaml:image", "README.md:version-badge"]
 
 [build-system]
-requires = ["poetry==1.1.4"]
+requires = ["poetry==1.1.5"]
 build-backend = "poetry.masonry.api"

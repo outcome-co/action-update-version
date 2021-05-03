@@ -61,7 +61,7 @@ class Trivia:
         trail: Optional[str] = ...,
     ) -> None: ...
 
-class Table(Item, dict):
+class Table(Item, Dict[Union[Key, str], Any]):
     def __init__(
         self,
         value: Container,
