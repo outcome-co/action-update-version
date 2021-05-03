@@ -12,7 +12,7 @@ typer = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 syrupy = "^1.1.0"
-outcome-devkit = "7.2.0b2"
+outcome-devkit = "^7.2.0"
 
 [tool.docker]
 registry = "docker.io"

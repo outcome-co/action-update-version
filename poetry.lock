@@ -969,7 +969,7 @@ python-versions = "*"
 
 [[package]]
 name = "outcome-devkit"
-version = "7.2.0b2"
+version = "7.2.0"
 description = "A package containing common dev dependencies for python projects."
 category = "dev"
 optional = false
@@ -990,7 +990,7 @@ flake8-print = ">=3.1.4,<5.0.0"
 flake8-pytest = ">=1.3,<2.0"
 flake8-return = ">=1.1.1,<2.0.0"
 ipython = ">=7.13.0,<8.0.0"
-isort = ">=4.3.21,<6.0.0"
+isort = ">=5.8.0,<6.0.0"
 magicinvoke = ">=2.4.5,<3.0.0"
 outcome-read-toml = ">=2.1.1,<3.0.0"
 outcome-stubs = ">=0.5.4,<0.6.0"
@@ -1002,7 +1002,7 @@ pre-commit = ">=2.10.1,<3.0.0"
 pydantic = ">=1.7.3,<2.0.0"
 pygit2 = ">=1.5.0,<2.0.0"
 pytest = ">=6.2.2,<7.0.0"
-pytest-asyncio = ">=0.12,<0.15"
+pytest-asyncio = ">=0.12,<0.16"
 rich = ">=9.11.0,<10.0.0"
 syrupy = ">=1.1.0,<2.0.0"
 wemake-python-styleguide = ">=0.15.1,<0.16.0"
@@ -1398,17 +1398,17 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 
 [[package]]
 name = "pytest-asyncio"
-version = "0.14.0"
+version = "0.15.1"
 description = "Pytest support for asyncio."
 category = "dev"
 optional = false
-python-versions = ">= 3.5"
+python-versions = ">= 3.6"
 
 [package.dependencies]
 pytest = ">=5.4.0"
 
 [package.extras]
-testing = ["async-generator (>=1.3)", "coverage", "hypothesis (>=5.7.1)"]
+testing = ["coverage", "hypothesis (>=5.7.1)"]
 
 [[package]]
 name = "python-dotenv"
@@ -1702,7 +1702,7 @@ doc = ["mkdocs (>=1.1.2,<2.0.0)", "mkdocs-material (>=5.4.0,<6.0.0)", "markdown-
 
 [[package]]
 name = "typing-extensions"
-version = "3.7.4.3"
+version = "3.10.0.0"
 description = "Backported and Experimental Type Hints for Python 3.5+"
 category = "dev"
 optional = false
@@ -1811,7 +1811,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8.6"
-content-hash = "28cd85ddaafbdb91496f0537017d050b93cb864aa011c4f9b7b784b58d111693"
+content-hash = "277fc7e07b07cf7e4549354669a9bcb7e061442a7f0ef93865e91a5f58cf3557"
 
 [metadata.files]
 appdirs = [
@@ -2325,8 +2325,8 @@ nodeenv = [
     {file = "nodeenv-1.6.0.tar.gz", hash = "sha256:3ef13ff90291ba2a4a7a4ff9a979b63ffdd00a464dbe04acf0ea6471517a4c2b"},
 ]
 outcome-devkit = [
-    {file = "outcome-devkit-7.2.0b2.tar.gz", hash = "sha256:eb504a692d5e0b4bb178c88227ed7aeaaa91baebeabb2cde7e75e262be5bd3dc"},
-    {file = "outcome_devkit-7.2.0b2-py3-none-any.whl", hash = "sha256:d0583889ce15e95a55bccce746f9b6c6f1c33b7d57e98acea56ab5d5b8d8e2a3"},
+    {file = "outcome-devkit-7.2.0.tar.gz", hash = "sha256:9d3ccb43fb1cbd4cc9c1c8022593be73b592308f7a0aa2d04ab31e0c15b80c0f"},
+    {file = "outcome_devkit-7.2.0-py3-none-any.whl", hash = "sha256:4079baa1bab678b1973d77992c9e0daf14d373ea01ccb517d191e0070b7d8ce4"},
 ]
 outcome-read-toml = [
     {file = "outcome-read-toml-2.1.1.tar.gz", hash = "sha256:aa5752e2b1f4b8ac6d13629210b5b79a3b3663cdfaf30175d23eb30a4b48702f"},
@@ -2498,8 +2498,8 @@ pytest = [
     {file = "pytest-6.2.3.tar.gz", hash = "sha256:671238a46e4df0f3498d1c3270e5deb9b32d25134c99b7d75370a68cfbe9b634"},
 ]
 pytest-asyncio = [
-    {file = "pytest-asyncio-0.14.0.tar.gz", hash = "sha256:9882c0c6b24429449f5f969a5158b528f39bde47dc32e85b9f0403965017e700"},
-    {file = "pytest_asyncio-0.14.0-py3-none-any.whl", hash = "sha256:2eae1e34f6c68fc0a9dc12d4bea190483843ff4708d24277c41568d6b6044f1d"},
+    {file = "pytest-asyncio-0.15.1.tar.gz", hash = "sha256:2564ceb9612bbd560d19ca4b41347b54e7835c2f792c504f698e05395ed63f6f"},
+    {file = "pytest_asyncio-0.15.1-py3-none-any.whl", hash = "sha256:3042bcdf1c5d978f6b74d96a151c4cfb9dcece65006198389ccd7e6c60eb1eea"},
 ]
 python-dotenv = [
     {file = "python-dotenv-0.17.1.tar.gz", hash = "sha256:b1ae5e9643d5ed987fc57cc2583021e38db531946518130777734f9589b3141f"},
@@ -2699,9 +2699,9 @@ typer = [
     {file = "typer-0.3.2.tar.gz", hash = "sha256:5455d750122cff96745b0dec87368f56d023725a7ebc9d2e54dd23dc86816303"},
 ]
 typing-extensions = [
-    {file = "typing_extensions-3.7.4.3-py2-none-any.whl", hash = "sha256:dafc7639cde7f1b6e1acc0f457842a83e722ccca8eef5270af2d74792619a89f"},
-    {file = "typing_extensions-3.7.4.3-py3-none-any.whl", hash = "sha256:7cb407020f00f7bfc3cb3e7881628838e69d8f3fcab2f64742a5e76b2f841918"},
-    {file = "typing_extensions-3.7.4.3.tar.gz", hash = "sha256:99d4073b617d30288f569d3f13d2bd7548c3a7e4c8de87db09a9d29bb3a4a60c"},
+    {file = "typing_extensions-3.10.0.0-py2-none-any.whl", hash = "sha256:0ac0f89795dd19de6b97debb0c6af1c70987fd80a2d62d1958f7e56fcc31b497"},
+    {file = "typing_extensions-3.10.0.0-py3-none-any.whl", hash = "sha256:779383f6086d90c99ae41cf0ff39aac8a7937a9283ce0a414e5dd782f4c94a84"},
+    {file = "typing_extensions-3.10.0.0.tar.gz", hash = "sha256:50b6f157849174217d0656f99dc82fe932884fb250826c18350e159ec6cdf342"},
 ]
 unidecode = [
     {file = "Unidecode-1.2.0-py2.py3-none-any.whl", hash = "sha256:12435ef2fc4cdfd9cf1035a1db7e98b6b047fe591892e81f34e94959591fad00"},
