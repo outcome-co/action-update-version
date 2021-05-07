@@ -261,7 +261,7 @@ pygments = "*"
 
 [[package]]
 name = "commitizen"
-version = "2.17.5"
+version = "2.17.6"
 description = "Python commitizen client tool"
 category = "main"
 optional = false
@@ -1811,7 +1811,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8.6"
-content-hash = "7416c15128b8abe44f6a4a6ab42b901be59381eca7a70e1f1ee7db6e686cbff6"
+content-hash = "a714afe641b38e499ece705011628d909ab4ff290436ba2285ed263f7a8ab4d4"
 
 [metadata.files]
 appdirs = [
@@ -1948,8 +1948,8 @@ colored-traceback = [
     {file = "colored_traceback-0.3.0-py2-none-any.whl", hash = "sha256:f76c21a4b4c72e9e09763d4d1b234afc469c88693152a763ad6786467ef9e79f"},
 ]
 commitizen = [
-    {file = "commitizen-2.17.5-py3-none-any.whl", hash = "sha256:fa49da8cbe507015e72918ebf4c947863b886bb3d106fa9869a4608dcfd663f9"},
-    {file = "commitizen-2.17.5.tar.gz", hash = "sha256:02595f743a1f012b70ed2981c42e2d6b9ee04164ca1bcb929cc5286f33cfc38b"},
+    {file = "commitizen-2.17.6-py3-none-any.whl", hash = "sha256:5320e801f348f0312876dab2563642d42af75fa909ef1ee588a05f90a6bd1246"},
+    {file = "commitizen-2.17.6.tar.gz", hash = "sha256:38e4e309bb502c1d4d7c944ee604dbed631d814cabc87b1edd6a3cb27f41456a"},
 ]
 commonmark = [
     {file = "commonmark-0.9.1-py2.py3-none-any.whl", hash = "sha256:da2f38c92590f83de410ba1a3cbceafbc74fee9def35f9251ba9a971d6d66fd9"},
